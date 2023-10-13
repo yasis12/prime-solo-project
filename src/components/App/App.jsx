@@ -13,6 +13,7 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+// Pages
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -20,6 +21,12 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import InstructionsPage from '../InstructionsPage/InstructionsPage';
+import IncomePage from '../IncomePage/IncomePage';
+import NeedsPage from '../NeedsPage/NeedsPage';
+import WantsPage from '../WantsPage/WantsPage';
+import SavingsDebtsPage from '../SavingsDebtsPage/SavingsDebtsPage';
+import AuditPage from '../AuditPage/AuditPage';
+import ResourcesPage from '../ResourcesPage/ResourcesPage';
 
 import './App.css';
 
@@ -111,9 +118,35 @@ function App() {
             }
           </Route>
 
+          {/* Instructions Page */}
           <ProtectedRoute exact path="/instructions">
             <InstructionsPage />
-          </ProtectedRoute>
+          </ProtectedRoute>   
+          
+          {/* Income Page */}
+          <ProtectedRoute exact path="/income">
+            <IncomePage />
+          </ProtectedRoute> 
+          {/* Needs Page */}
+          <ProtectedRoute exact path="/needs">
+            <NeedsPage />
+          </ProtectedRoute> 
+          {/* Wants Page */}
+          <ProtectedRoute exact path="/wants">
+            <WantsPage />
+          </ProtectedRoute> 
+          {/* Savings & Debts Page */}
+          <ProtectedRoute exact path="/savingsdebts">
+            <SavingsDebtsPage />
+          </ProtectedRoute> 
+          {/* Audit Page */}
+          <ProtectedRoute exact path="/audit">
+            <AuditPage />
+          </ProtectedRoute> 
+          {/* Resources Page */}
+          <ProtectedRoute exact path="/resources">
+            <ResourcesPage />
+          </ProtectedRoute> 
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

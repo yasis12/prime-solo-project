@@ -1,10 +1,10 @@
 import './InstructionsPage.css'
 
-function Instructions() {
+function InstructionsPage() {
     
     return (
         <h1>Instructions</h1>
     )
 }
 
-export default Instructions;
+export default InstructionsPage;
