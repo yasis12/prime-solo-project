@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import { useState} from 'react';
 
 function Nav() {
   const user = useSelector((store) => store.user);
+  const [showDropDown, setShowDropDown] = useState(false);
+
+  // Dropdown functionality
+  const toggleDropDown = () => {
+    setShowDropDown(!showDropDown);
+  };
 
   return (
     <div className="nav">
@@ -31,22 +38,17 @@ function Nav() {
             <Link className="navLink" to="/instructions">
               Instructions
             </Link>
-            {/* Income link */}
-            <Link className="navLink" to="/income">
-              Income
-            </Link>
-            {/* Needs link */}
-            <Link className="navLink" to="/needs">
-              Needs
-            </Link>
-            {/* Wants link */}
-            <Link className="navLink" to="/wants">
-              Wants
-            </Link>
-            {/* Savgings & Debts link */}
-            <Link className="navLink" to="/savingsdebts">
-              Savings&Debts
-            </Link>
+
+            <div className="navLink dropdown">
+              Input Forms
+              <div className="dropdown-content">
+                <Link to="/income">Income</Link>
+                <Link to="/needs">Needs</Link>
+                <Link to="/wants">Wants</Link>
+                <Link to="/savingsdebts">Savings&Debts</Link>
+              </div>
+            </div>
+
             {/* Audit link */}
             <Link className="navLink" to="/audit">
               Audit
