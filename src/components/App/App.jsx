@@ -19,7 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import Instructions from '../Instructions/Instructions';
+import InstructionsPage from '../InstructionsPage/InstructionsPage';
 
 import './App.css';
 
@@ -112,7 +112,7 @@ function App() {
           </Route>
 
           <ProtectedRoute exact path="/instructions">
-            <Instructions />
+            <InstructionsPage />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

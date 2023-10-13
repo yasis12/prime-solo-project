@@ -1,4 +1,4 @@
-import './Instructions.css'
+import './InstructionsPage.css'
 
 function Instructions() {
     
