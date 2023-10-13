@@ -1,7 +1,13 @@
 import './InstructionsPage.css'
+import { useHistory } from 'react-router-dom';
 
 function InstructionsPage() {
-    
+    const history = useHistory();
+
+    const handleClick = () => {
+        history.push('/income')
+    }
+
     return (
         <>
         <h1>How To Use Budget Buddy</h1>
@@ -14,7 +20,8 @@ function InstructionsPage() {
         <li><strong>Create Your Customized Budget (Not yet available in this applicaiton):</strong> Based on the insights provided, you can create a budget that suits your unique financial needs. This budget will help you reach your specific financial goals effectively.</li>
         <li><strong>Good Luck!</strong> Budget Buddy is here to support your journey to financial stability. Remember that the more honest and detailed you are with your inputs, the more accurate and helpful the tool becomes. Here's to achieving positive financial changes!</li>
         </ol>
-        
+        <br />
+        <button onClick={handleClick}>Get Started with Budget Buddy</button>
         </>
         
 
