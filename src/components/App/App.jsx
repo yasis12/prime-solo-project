@@ -122,7 +122,6 @@ function App() {
           <ProtectedRoute exact path="/instructions">
             <InstructionsPage />
           </ProtectedRoute>   
-          
           {/* Income Page */}
           <ProtectedRoute exact path="/income">
             <IncomePage />

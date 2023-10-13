@@ -27,14 +27,35 @@ function Nav() {
             <Link className="navLink" to="/user">
               Home
             </Link>
-            
+            {/* Insturctions link */}
             <Link className="navLink" to="/instructions">
               Instructions
             </Link>
-
-            <Link className="navLink" to="/info">
-              Info Page
+            {/* Income link */}
+            <Link className="navLink" to="/income">
+              Income
             </Link>
+            {/* Needs link */}
+            <Link className="navLink" to="/needs">
+              Needs
+            </Link>
+            {/* Wants link */}
+            <Link className="navLink" to="/wants">
+              Wants
+            </Link>
+            {/* Savgings & Debts link */}
+            <Link className="navLink" to="/savingsdebts">
+              Savings&Debts
+            </Link>
+            {/* Audit link */}
+            <Link className="navLink" to="/audit">
+              Audit
+            </Link>
+            {/* Resources link */}
+            <Link className="navLink" to="/resources">
+              Resources
+            </Link>
+
 
             <LogOutButton className="navLink" />
           </>
