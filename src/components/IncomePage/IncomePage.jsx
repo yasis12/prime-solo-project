@@ -41,7 +41,6 @@ function IncomePage() {
                         <input type="text" placeholder='Description' name="description" value={value.description} onChange={(event) => handleOtherIncomeChange(event, i)}/>
                         <button onClick={addInputField}> + </button>
                     </div>
-    
                 ))}
             </div>
             <button type='submit'>NEXT PAGE</button>
