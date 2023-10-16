@@ -64,6 +64,7 @@ function SavingsDebtsPage() {
                     <div key={i}>
                         <input 
                         type = "number"
+                        placeholder='$'
                         name = "price"
                         value ={value.price}
                         onChange={(event) => handleInputChange(event, category, i)}

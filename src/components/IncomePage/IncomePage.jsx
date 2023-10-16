@@ -30,14 +30,14 @@ function IncomePage() {
          <form onSubmit={handleSubmit}>
             <div className='wagesAfterTax form-field'>
                 <label>Wages After Tax: </label>
-                <input type="number" />
+                <input type="number" placeholder='$' />
                 <input type="text" placeholder='Description' />
             </div>
             <div className='otherIncome form-field'>
             <label>Other Income: </label>
                 {otherIncomeForm.map((value, i) => (
                     <div key={i}>
-                        <input type="number" name='price' value={value.price} onChange={(event) => handleOtherIncomeChange(event, i)}/>
+                        <input type="number" name='price' placeholder='$' value={value.price} onChange={(event) => handleOtherIncomeChange(event, i)}/>
                         <input type="text" placeholder='Description' name="description" value={value.description} onChange={(event) => handleOtherIncomeChange(event, i)}/>
                         <button onClick={addInputField}> + </button>
                     </div>
