@@ -63,7 +63,15 @@ function WantsPage() {
                     <div key={i}>
                         <input 
                         type = "number"
-                        name = "price"
+                        name = "Price"
+                        placeholder="$"
+                        value ={value.price}
+                        onChange={(event) => handleInputChange(event, category, i)}
+                        />
+                        <input 
+                        type = "text"
+                        name = "description"
+                        placeholder='Description'
                         value ={value.price}
                         onChange={(event) => handleInputChange(event, category, i)}
                         />
