@@ -83,6 +83,13 @@ function NeedsPage() {
                         value ={value.price}
                         onChange={(event) => handleInputChange(event, category, i)}
                         />
+                        <input 
+                        type = "text"
+                        name = "description"
+                        placeholder='Description'
+                        value ={value.price}
+                        onChange={(event) => handleInputChange(event, category, i)}
+                        />
                         <button onClick={() => addInputField(category)}>+</button>
                     </div>
                 ))}
