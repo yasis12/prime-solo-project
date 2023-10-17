@@ -1,14 +1,21 @@
 import { useState } from 'react';
 import './IncomePage.css'
 import { useHistory } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
 
 function IncomePage() {
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [otherIncomeForm, setOtherIncomeForm] = useState([{price:'', description: ''}]);
 
-    const handleSubmit = () => {
-        history.push('/needs');
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch({
+            type: 'SET_INCOME',
+            payload: otherIncomeForm
+        })
+        // history.push('/needs'); commenting out while I get store to work
     }
 
     const addInputField = () => {
