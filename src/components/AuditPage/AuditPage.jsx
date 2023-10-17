@@ -1,9 +1,15 @@
 import './AuditPage.css'
+import { useSelector } from 'react-redux';
 
 function AuditPage() {
+
+    const incomeArray = useSelector(store => store.income);
+    const income = incomeArray[0] || {}; //Default empty array 
     
     return (
         <>
+
+        <h3>STORE TEST: {income.price}</h3>
         <h1>Audit Page</h1>
         <div className='monthlyIncome'>
             <h3>Monthly Income: $2000{}</h3> {/* the 2000 is a placeholder until store is created */}
