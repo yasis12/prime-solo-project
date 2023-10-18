@@ -8,14 +8,15 @@ function IncomePage() {
     const dispatch = useDispatch();
 
     const [otherIncomeForm, setOtherIncomeForm] = useState([{price:'', description: ''}]);
+    const [wagesAfterTax, setWagesAfterTax] = useState([{price:'', description: ''}]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch({
             type: 'SET_INCOME',
-            payload: otherIncomeForm
+            payload: otherIncomeForm, wagesAfterTax
         })
-        // history.push('/needs'); commenting out while I get store to work
+        history.push('/needs');
     }
 
     const addInputField = () => {
@@ -30,15 +31,20 @@ function IncomePage() {
         updatedFields[i][name] = value;
         setOtherIncomeForm(updatedFields);
     }
+
+      const handleWagesAfterTaxChange = (event) => {
+        const { name, value } = event.target;
+        setWagesAfterTax({ ...wagesAfterTax, [name]: value });
+    }
     
     return (
         <>
-     <h1>Income Page</h1>
+        <h1>Income Page</h1>
          <form onSubmit={handleSubmit}>
             <div className='wagesAfterTax form-field'>
                 <label>Wages After Tax: </label>
-                <input type="number" placeholder='$' />
-                <input type="text" placeholder='Description' />
+                <input type="number" placeholder='$' value={wagesAfterTax.price} onChange={handleWagesAfterTaxChange}/>
+                <input type="text" placeholder='Description' value={wagesAfterTax.description} onChange={handleWagesAfterTaxChange}/>
             </div>
             <div className='otherIncome form-field'>
             <label>Other Income: </label>

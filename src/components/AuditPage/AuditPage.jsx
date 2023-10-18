@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux';
 function AuditPage() {
 
     const incomeArray = useSelector(store => store.income);
-    // const income = incomeArray[0] || {}; //Default empty array // what I need to do next is create a function that loops trought the incomeArray and adds all the Prices
+    console.log('Income Array', incomeArray);
+    
     const calulateTotalIncome = () => {
         let totalIncome = 0;
 

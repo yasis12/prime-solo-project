@@ -1,8 +1,12 @@
 
 
-const income =(state= [], action) => {
+const income =(state= { otherIncomeForm: [], wagesAfterTax: [] }, action) => {
     if (action.type === 'SET_INCOME') {
-        return action.payload
+        return {
+            ...state,
+            otherIncomeForm: action.payload.otherIncomeForm,
+            wagesAfterTax: action.payload.wagesAfterTax,
+        };
     }
     return state;
 }
