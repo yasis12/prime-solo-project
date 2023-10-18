@@ -1,15 +1,27 @@
+import { useState } from 'react';
 import './AuditPage.css'
 import { useSelector } from 'react-redux';
 
 function AuditPage() {
 
     const incomeArray = useSelector(store => store.income);
-    const income = incomeArray[0] || {}; //Default empty array 
-    
+    // const income = incomeArray[0] || {}; //Default empty array // what I need to do next is create a function that loops trought the incomeArray and adds all the Prices
+    const calulateTotalIncome = () => {
+        let totalIncome = 0;
+
+        for (let i=0; i < incomeArray.length; i++) {
+            const price = parseFloat(incomeArray[i].price);
+            totalIncome += price;
+        }
+        return totalIncome;
+    };
+    const totalIncome = calulateTotalIncome();
+    console.log('total Income', totalIncome);
+
     return (
         <>
 
-        <h3>STORE TEST: {income.price}</h3>
+        <h3>STORE TEST: {totalIncome}</h3>
         <h1>Audit Page</h1>
         <div className='monthlyIncome'>
             <h3>Monthly Income: $2000{}</h3> {/* the 2000 is a placeholder until store is created */}
