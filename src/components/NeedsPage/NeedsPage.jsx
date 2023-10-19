@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import './NeedsPage.css'
 import { useHistory } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
 
 function NeedsPage() {
     const history = useHistory();
+    const dispatch = useDispatch();
 
     //USE STATE
     const [forms, setForms] = useState({
@@ -43,7 +45,12 @@ function NeedsPage() {
     }
 
     //HANDLE FORM SUBMIT
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch({
+            type: 'SET_NEEDS',
+            payload: forms
+        })
         history.push('/wants')
     }
 
@@ -88,7 +95,7 @@ function NeedsPage() {
                         type = "text"
                         name = "description"
                         placeholder='Description'
-                        value ={value.price}
+                        value ={value.description}
                         onChange={(event) => handleInputChange(event, category, i)}
                         />
                         <button onClick={() => addInputField(category)}>+</button>
