@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './IncomePage.css'
 import { useHistory } from 'react-router-dom';
 import { useDispatch} from 'react-redux';
@@ -10,6 +10,14 @@ function IncomePage() {
     const [otherIncomeForm, setOtherIncomeForm] = useState([{price:'', description: ''}]);
     const [wagesAfterTax, setWagesAfterTax] = useState({ price: '', description: '' });
 
+    // use effect test
+    useEffect(() => {
+        // When the component unmounts, save the form data to localStorage
+        return () => {
+            const incomeData = { otherIncomeForm, wagesAfterTax };
+            localStorage.setItem('incomeData', JSON.stringify(incomeData));
+        };
+    }, [otherIncomeForm, wagesAfterTax]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
