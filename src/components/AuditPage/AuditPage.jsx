@@ -16,7 +16,7 @@ function AuditPage() {
         //looping through the other income form to add all the incomes
         for (let i=0; i < incomeArray.otherIncomeForm.length; i++) {
             const price = parseFloat(incomeArray.otherIncomeForm[i].price);
-            totalIncome += price;
+            totalIncome += isNaN(price) ? 0 : price;
         }
         // This is all price inputs from income page 
         return totalIncome;

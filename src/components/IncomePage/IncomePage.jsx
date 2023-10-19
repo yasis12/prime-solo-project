@@ -44,7 +44,7 @@ function IncomePage() {
          <form onSubmit={handleSubmit}>
             <div className='wagesAfterTax form-field'>
                 <label>Wages After Tax: </label>
-                <input type="number" placeholder='$' value={wagesAfterTax.price} onChange={(event) => handleWagesAfterTaxChange(event, 'price')}/>
+                <input type="number" placeholder='$' value={wagesAfterTax.price} onChange={(event) => handleWagesAfterTaxChange(event, 'price')} required/>
                 <input type="text" placeholder='Description' value={wagesAfterTax.description} onChange={(event) => handleWagesAfterTaxChange(event, 'decription')}/>
             </div>
             <div className='otherIncome form-field'>
