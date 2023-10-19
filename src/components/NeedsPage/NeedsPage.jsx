@@ -49,7 +49,7 @@ function NeedsPage() {
 
     return (
         <>
-        <h1>Wants Page</h1>
+        <h1>Needs Page</h1>
         <form onSubmit={handleSubmit}>
         {/* START FORM */}
             {/* Dining Out */}
