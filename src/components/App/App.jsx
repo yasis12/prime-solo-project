@@ -27,6 +27,7 @@ import WantsPage from '../WantsPage/WantsPage';
 import SavingsDebtsPage from '../SavingsDebtsPage/SavingsDebtsPage';
 import AuditPage from '../AuditPage/AuditPage';
 import ResourcesPage from '../ResourcesPage/ResourcesPage';
+import ReviewPage from '../ReviewPage/ReviewPage';
 
 import './App.css';
 
@@ -137,6 +138,10 @@ function App() {
           {/* Savings & Debts Page */}
           <ProtectedRoute exact path="/savingsdebts">
             <SavingsDebtsPage />
+          </ProtectedRoute> 
+          {/* Review Page */}
+          <ProtectedRoute exact path="/review">
+            <ReviewPage />
           </ProtectedRoute> 
           {/* Audit Page */}
           <ProtectedRoute exact path="/audit">

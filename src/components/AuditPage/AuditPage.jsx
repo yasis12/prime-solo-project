@@ -3,11 +3,17 @@ import './AuditPage.css'
 import { useSelector } from 'react-redux';
 
 function AuditPage() {
+    // Store
+    const incomeArray = useSelector(store => store.income);
+    const needsArray = useSelector(store => store.needs);
+    const wantsArray = useSelector(store => store.wants);
+    const savingsDebtsArray = useSelector(store => store.savingsDebts);
+    console.log('Needs', needsArray);
+    console.log('Wants',wantsArray);
+    console.log('Savings & Debts', savingsDebtsArray);
+   
 
     // Total Income data handling
-    const incomeArray = useSelector(store => store.income);
-    console.log('Income Array', incomeArray);
-    
     const calulateTotalIncome = () => {
         let totalIncome = 0;
         // using parseFloat to ensure the data is a number
@@ -28,7 +34,7 @@ function AuditPage() {
 
     return (
         <>
-
+        
         <h3>STORE TEST: {}</h3>
         <h1>Audit Page</h1>
         <div className='monthlyIncome'>
