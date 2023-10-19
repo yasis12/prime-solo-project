@@ -8,13 +8,14 @@ function IncomePage() {
     const dispatch = useDispatch();
 
     const [otherIncomeForm, setOtherIncomeForm] = useState([{price:'', description: ''}]);
-    const [wagesAfterTax, setWagesAfterTax] = useState([{price:'', description: ''}]);
+    const [wagesAfterTax, setWagesAfterTax] = useState({ price: '', description: '' });
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch({
             type: 'SET_INCOME',
-            payload: otherIncomeForm, wagesAfterTax
+            payload: {otherIncomeForm, wagesAfterTax}
         })
         history.push('/needs');
     }
@@ -32,8 +33,8 @@ function IncomePage() {
         setOtherIncomeForm(updatedFields);
     }
 
-      const handleWagesAfterTaxChange = (event) => {
-        const { name, value } = event.target;
+      const handleWagesAfterTaxChange = (event, name) => {
+        const value = event.target.value;
         setWagesAfterTax({ ...wagesAfterTax, [name]: value });
     }
     
@@ -43,8 +44,8 @@ function IncomePage() {
          <form onSubmit={handleSubmit}>
             <div className='wagesAfterTax form-field'>
                 <label>Wages After Tax: </label>
-                <input type="number" placeholder='$' value={wagesAfterTax.price} onChange={handleWagesAfterTaxChange}/>
-                <input type="text" placeholder='Description' value={wagesAfterTax.description} onChange={handleWagesAfterTaxChange}/>
+                <input type="number" placeholder='$' value={wagesAfterTax.price} onChange={(event) => handleWagesAfterTaxChange(event, 'price')}/>
+                <input type="text" placeholder='Description' value={wagesAfterTax.description} onChange={(event) => handleWagesAfterTaxChange(event, 'decription')}/>
             </div>
             <div className='otherIncome form-field'>
             <label>Other Income: </label>

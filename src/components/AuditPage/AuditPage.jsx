@@ -4,28 +4,35 @@ import { useSelector } from 'react-redux';
 
 function AuditPage() {
 
+    // Total Income data handling
     const incomeArray = useSelector(store => store.income);
     console.log('Income Array', incomeArray);
     
     const calulateTotalIncome = () => {
         let totalIncome = 0;
-
-        for (let i=0; i < incomeArray.length; i++) {
-            const price = parseFloat(incomeArray[i].price);
+        // using parseFloat to ensure the data is a number
+        const wagesAfterTaxPrice = parseFloat(incomeArray.wagesAfterTax.price);
+        totalIncome += wagesAfterTaxPrice;
+        //looping through the other income form to add all the incomes
+        for (let i=0; i < incomeArray.otherIncomeForm.length; i++) {
+            const price = parseFloat(incomeArray.otherIncomeForm[i].price);
             totalIncome += price;
         }
+        // This is all price inputs from income page 
         return totalIncome;
     };
+
     const totalIncome = calulateTotalIncome();
     console.log('total Income', totalIncome);
+    // End total income data handling
 
     return (
         <>
 
-        <h3>STORE TEST: {totalIncome}</h3>
+        <h3>STORE TEST: {}</h3>
         <h1>Audit Page</h1>
         <div className='monthlyIncome'>
-            <h3>Monthly Income: $2000{}</h3> {/* the 2000 is a placeholder until store is created */}
+            <h3>Monthly Income: ${totalIncome}</h3> {/* the 2000 is a placeholder until store is created */}
         </div>
         <div className='monthlySpending'>
             <h3>Monthly Spending: $2000{}</h3> {/* the 2000 is a placeholder until store is created */}
