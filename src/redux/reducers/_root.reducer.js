@@ -4,6 +4,7 @@ import user from './user.reducer';
 import income from './income.reducer';
 import needs from './needs.reducer';
 import wants from './wants.reducer';
+import savingsDebts from './savingsDebts.reducer';
 
 
 
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   income,
   needs,
-  wants
+  wants,
+  savingsDebts
 });
 
 export default rootReducer;
