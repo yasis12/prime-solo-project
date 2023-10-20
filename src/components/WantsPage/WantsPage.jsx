@@ -1,11 +1,12 @@
 import './WantsPage.css'
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 function WantsPage() {
     const history = useHistory();
-    const dispatch = useDispatch();
+    const budgetID = useSelector(store => store.budgetID);
 
     //USE STATE
     const [forms, setForms] = useState({
@@ -40,10 +41,21 @@ function WantsPage() {
     //HANDLE FORM SUBMIT
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch({
-            type: 'SET_WANTS',
-            payload: forms
-        })
+        const requestData = {
+            forms,
+            budgetID
+        }
+        console.log('Wants Post Request Data:', requestData);
+        axios.post('/api/wants', requestData)
+        .then((response) => {
+            console.log(`Wants data submitted successfully`);
+        }).catch(error => {
+            console.log('Error submitting wants data', error);
+        });
+
+    }
+
+    const nextPage = () => {
         history.push('/savingsdebts')
     }
 
@@ -87,10 +99,10 @@ function WantsPage() {
                 ))}
             </div>
         ))}
-        <button type='submit'>NEXT PAGE</button>
+        <button type='submit'>Save Wants</button>
         {/* END FORM */}
         </form>
-        
+        <button onClick={nextPage}>Next Page</button>
         </>
        
     )

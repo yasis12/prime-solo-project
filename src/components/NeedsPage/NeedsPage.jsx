@@ -55,9 +55,9 @@ function NeedsPage() {
         console.log('Needs Post Request Data:', requestData);
         axios.post('/api/needs', requestData)
         .then((response) => {
-            console.log(`Income data submitted successfully`);
+            console.log(`Needs data submitted successfully`);
         }).catch(error => {
-            console.log('Error submitting Income data', error);
+            console.log('Error submitting needs data', error);
         });
     }
 
