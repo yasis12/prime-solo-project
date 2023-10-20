@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './IncomePage.css'
 import { useHistory } from 'react-router-dom';
 import { useDispatch} from 'react-redux';
+import axios from 'axios';
 
 function IncomePage() {
     const history = useHistory();
@@ -20,15 +21,26 @@ function IncomePage() {
             payload: budgetID
         })
     };
-    //Submit income Form
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch({
-            type: 'SET_INCOME',
-            payload: {otherIncomeForm, wagesAfterTax}
-        })
-        history.push('/needs');
+        const incomeData = {
+            wagesAfterTax,
+            otherIncomeForm
+        }
+        const requestData = {
+            incomeData,
+            budgetID
+        }
+        console.log('Post Request Data', requestData);
+        axios.post('/api/income', requestData)
+        .then((response) => {
+            console.log(`Income data submitted successfully`);
+        }).catch(error => {
+            console.log('Error submitting Income data', error);
+        });
     }
+
     //Functions to handle adding an input filed and storing the data
     const addInputField = () => {
         event.preventDefault();
@@ -44,6 +56,11 @@ function IncomePage() {
       const handleWagesAfterTaxChange = (event, name) => {
         const value = event.target.value;
         setWagesAfterTax({ ...wagesAfterTax, [name]: value });
+    }
+
+    // next page
+    const nextPage = () => {
+        history.push('/needs')
     }
     
     return (
@@ -75,6 +92,7 @@ function IncomePage() {
             </div>
             <button type='submit'>Submit Income</button>
         </form>
+        <button onClick={nextPage}>Next Page</button>
         </>
     )
 }

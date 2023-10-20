@@ -4,6 +4,7 @@ const router = express.Router();
 
 // income POST ROUTER
 router.post('/income', (req, res) => {
+    console.log('Income Data',req.body);
     // POST route code here
   });
 
