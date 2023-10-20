@@ -1,11 +1,13 @@
 import './SavingsDebtsPage.css'
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 function SavingsDebtsPage() {
     const history = useHistory();
-    const dispatch = useDispatch();
+    const budgetID = useSelector(store => store.budgetID);
+
 
     //USE STATE
     const [forms, setForms] = useState({
@@ -40,14 +42,23 @@ function SavingsDebtsPage() {
     //HANDLE FORM SUBMIT
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch({
-            type: 'SET_SAVINGSDEBTS',
-            payload: forms
-        })
-        history.push('/audit')
+        const requestData = {
+            forms,
+            budgetID
+        }
+        console.log('Needs Post Request Data:', requestData);
+        axios.post('/api/savingsdebts', requestData)
+        .then((response) => {
+            console.log(`Needs data submitted successfully`);
+        }).catch(error => {
+            console.log('Error submitting needs data', error);
+        });
+
     }
 
-    
+    const nextPage = () => {
+        history.push('/audit')
+    }
     return (
         <>
         <h1>Savings & Debts</h1>
@@ -88,10 +99,10 @@ function SavingsDebtsPage() {
                 ))}
             </div>
         ))}
-        <button type='submit'>NEXT PAGE</button>
+        <button type='submit'>Submit Savings & Debts</button>
         {/* END FORM */}
         </form>
-        
+        <button onClick={nextPage}>Next Page</button>
         </>
     )
 }
