@@ -43,7 +43,6 @@ function IncomePage() {
 
     //Functions to handle adding an input filed and storing the data
     const addInputField = () => {
-        event.preventDefault();
         setOtherIncomeForm([...otherIncomeForm, { price: '', description: '' }]);
         console.log('Input Field being added');
     }
@@ -78,7 +77,7 @@ function IncomePage() {
             <div className='wagesAfterTax form-field'>
                 <label>Wages After Tax: </label>
                 <input type="number" placeholder='$' value={wagesAfterTax.price} onChange={(event) => handleWagesAfterTaxChange(event, 'price')} required/>
-                <input type="text" placeholder='Description' value={wagesAfterTax.description} onChange={(event) => handleWagesAfterTaxChange(event, 'decription')}/>
+                <input type="text" placeholder='Description' value={wagesAfterTax.description} onChange={(event) => handleWagesAfterTaxChange(event, 'description')} />
             </div>
             <div className='otherIncome form-field'>
             <label>Other Income: </label>

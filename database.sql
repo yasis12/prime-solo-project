@@ -12,7 +12,7 @@ CREATE TABLE "user" (
 CREATE TABLE "Income" (
   "price" int NOT NULL,
   "description" varchar,
-  "category" int NOT NULL,
+  "category" VARCHAR(50) NOT NULL,
   "user_id" int NOT NULL,
   "budget_id" VARCHAR(50) NOT NULL
 );
@@ -20,7 +20,7 @@ CREATE TABLE "Income" (
 CREATE TABLE "Needs" (
   "price" int NOT NULL,
   "description" varchar,
-  "category" int NOT NULL,
+  "category" VARCHAR(50) NOT NULL,
   "user_id" int NOT NULL,
   "budget_id" VARCHAR(50) NOT NULL
 );
@@ -28,7 +28,7 @@ CREATE TABLE "Needs" (
 CREATE TABLE "Wants" (
   "price" int NOT NULL,
   "description" varchar,
-  "category" int NOT NULL,
+  "category" VARCHAR(50) NOT NULL,
   "user_id" int NOT NULL,
   "budget_id" VARCHAR(50) NOT NULL
 );
@@ -36,7 +36,7 @@ CREATE TABLE "Wants" (
 CREATE TABLE "SavingsDebts" (
   "price" int NOT NULL,
   "description" varchar,
-  "category" int NOT NULL,
+  "category" VARCHAR(50) NOT NULL,
   "user_id" int NOT NULL,
   "budget_id" VARCHAR(50) NOT NULL
 );

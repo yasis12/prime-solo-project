@@ -3,9 +3,14 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // income POST ROUTER
-router.post('/income', (req, res) => {
-    console.log('Income Data',req.body);
+router.post('/', (req, res) => {
+    console.log('Income POST route reached');
     // POST route code here
+    const { incomeData, budgetID } = req.body;
+    console.log('Income Data', incomeData);
+    console.log('Budget ID', budgetID);
+
+
   });
 
 // Income GET route
