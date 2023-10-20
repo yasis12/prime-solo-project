@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
                 [
                     parseInt(incomeData.wagesAfterTax.price),
                     incomeData.wagesAfterTax.description,
-                    'wagesAfterTax', // Replace with appropriate category value
+                    'wagesAfterTax', 
                     userID,
                     budgetID,
                 ]
@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
                         [
                             parseInt(item.price),
                             item.description,
-                            'otherIncome', // Replace with appropriate category value
+                            'otherIncome', 
                             userID,
                             budgetID,
                         ]
