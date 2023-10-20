@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import './NeedsPage.css'
 import { useHistory } from 'react-router-dom';
-import { useDispatch} from 'react-redux';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 function NeedsPage() {
     const history = useHistory();
-    const dispatch = useDispatch();
+    const budgetID = useSelector(store => store.budgetID);
 
     //USE STATE
     const [forms, setForms] = useState({
@@ -47,10 +48,20 @@ function NeedsPage() {
     //HANDLE FORM SUBMIT
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch({
-            type: 'SET_NEEDS',
-            payload: forms
-        })
+        const requestData = {
+            forms,
+            budgetID
+        }
+        console.log('Needs Post Request Data:', requestData);
+        axios.post('/api/needs', requestData)
+        .then((response) => {
+            console.log(`Income data submitted successfully`);
+        }).catch(error => {
+            console.log('Error submitting Income data', error);
+        });
+    }
+
+    const nextPage = () => {
         history.push('/wants')
     }
 
@@ -103,10 +114,10 @@ function NeedsPage() {
                 ))}
             </div>
         ))}
-        <button type='submit'>NEXT PAGE</button>
+        <button type='submit'>Save Needs</button>
         {/* END FORM */}
         </form>
-        
+        <button onClick={nextPage}>Next Page</button>
         </>
        
     )
