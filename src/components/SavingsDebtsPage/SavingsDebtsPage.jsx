@@ -44,7 +44,7 @@ function SavingsDebtsPage() {
             type: 'SET_SAVINGSDEBTS',
             payload: forms
         })
-        history.push('/review')
+        history.push('/audit')
     }
 
     

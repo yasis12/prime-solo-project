@@ -14,7 +14,7 @@ CREATE TABLE "Income" (
   "description" varchar,
   "category" int NOT NULL,
   "user_id" int NOT NULL,
-  "budget_id" int NOT NULL
+  "budget_id" VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE "Needs" (
@@ -22,7 +22,7 @@ CREATE TABLE "Needs" (
   "description" varchar,
   "category" int NOT NULL,
   "user_id" int NOT NULL,
-  "budget_id" int NOT NULL
+  "budget_id" VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE "Wants" (
@@ -30,7 +30,7 @@ CREATE TABLE "Wants" (
   "description" varchar,
   "category" int NOT NULL,
   "user_id" int NOT NULL,
-  "budget_id" int NOT NULL
+  "budget_id" VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE "SavingsDebts" (
@@ -38,7 +38,7 @@ CREATE TABLE "SavingsDebts" (
   "description" varchar,
   "category" int NOT NULL,
   "user_id" int NOT NULL,
-  "budget_id" int NOT NULL
+  "budget_id" VARCHAR(50) NOT NULL
 );
 
 ALTER TABLE "Income" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
