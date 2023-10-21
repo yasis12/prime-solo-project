@@ -31,31 +31,25 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            {/* Insturctions link */}
-            <Link className="navLink" to="/instructions">
-              Instructions
-            </Link>
-
             <div className="navLink dropdown">
-              Input Forms
+              Audit
               <div className="dropdown-content">
+              <Link to="/instructions">Instructions</Link>
                 <Link to="/income">Income</Link>
                 <Link to="/needs">Needs</Link>
                 <Link to="/wants">Wants</Link>
                 <Link to="/savingsdebts">Savings&Debts</Link>
+                <Link to="/audit">Audit</Link>
               </div>
             </div>
-
-            {/* Audit link */}
-            <Link className="navLink" to="/audit">
-              Audit
+            {/* Comments Link */}
+            <Link className="navLink" to="/budgetcomments">
+              Comments
             </Link>
             {/* Resources link */}
             <Link className="navLink" to="/resources">
               Resources
             </Link>
-
-
             <LogOutButton className="navLink" />
           </>
         )}

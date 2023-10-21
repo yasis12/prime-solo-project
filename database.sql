@@ -11,7 +11,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "Income" (
   "price" int NOT NULL,
-  "description" varchar(250),
+  "description" VARCHAR(250),
   "category" VARCHAR(50) NOT NULL,
   "user_id" int NOT NULL,
   "budget_id" VARCHAR(50) NOT NULL
@@ -19,7 +19,7 @@ CREATE TABLE "Income" (
 
 CREATE TABLE "Needs" (
   "price" int NOT NULL,
-  "description" varchar(250),
+  "description" VARCHAR(250),
   "category" VARCHAR(50) NOT NULL,
   "user_id" int NOT NULL,
   "budget_id" VARCHAR(50) NOT NULL
@@ -27,7 +27,7 @@ CREATE TABLE "Needs" (
 
 CREATE TABLE "Wants" (
   "price" int NOT NULL,
-  "description" varchar(250),
+  "description" VARCHAR(250),
   "category" VARCHAR(50) NOT NULL,
   "user_id" int NOT NULL,
   "budget_id" VARCHAR(50) NOT NULL
@@ -35,14 +35,14 @@ CREATE TABLE "Wants" (
 
 CREATE TABLE "SavingsDebts" (
   "price" int NOT NULL,
-  "description" varchar(250),
+  "description" VARCHAR(250),
   "category" VARCHAR(50) NOT NULL,
   "user_id" int NOT NULL,
   "budget_id" VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE "BudgetComments" (
-  "comments" varchar(1000),
+  "comments" VARCHAR(1000),
   "user_id" int NOT NULL,
   "budget_id" VARCHAR(50) NOT NULL
 );

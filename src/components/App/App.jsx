@@ -28,6 +28,7 @@ import SavingsDebtsPage from '../SavingsDebtsPage/SavingsDebtsPage';
 import AuditPage from '../AuditPage/AuditPage';
 import ResourcesPage from '../ResourcesPage/ResourcesPage';
 import ReviewPage from '../ReviewPage/ReviewPage';
+import BudgetComments from '../BudgetComments/BudgetComments';
 
 import './App.css';
 
@@ -146,6 +147,10 @@ function App() {
           {/* Audit Page */}
           <ProtectedRoute exact path="/audit">
             <AuditPage />
+          </ProtectedRoute> 
+          {/* Budget Comments Page */}
+          <ProtectedRoute exact path="/budgetcomments">
+            <BudgetComments />
           </ProtectedRoute> 
           {/* Resources Page */}
           <ProtectedRoute exact path="/resources">
