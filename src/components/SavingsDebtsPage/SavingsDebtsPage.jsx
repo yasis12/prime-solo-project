@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function SavingsDebtsPage() {
     const history = useHistory();
-    const budgetID = useSelector(store => store.budgetID);
+    const budgetTitle = useSelector(store => store.budgetTitle);
 
 
     //USE STATE
@@ -61,7 +61,7 @@ function SavingsDebtsPage() {
     }
     return (
         <>
-        <h1>Savings & Debts: {budgetID}</h1>
+        <h1>Savings & Debts: {budgetTitle}</h1>
         <form onSubmit={handleSubmit}>
         {/* START FORM */}
             {/* Dining Out */}

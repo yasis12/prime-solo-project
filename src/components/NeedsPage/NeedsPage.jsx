@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function NeedsPage() {
     const history = useHistory();
-    const budgetID = useSelector(store => store.budgetID);
+    const budgetTitle = useSelector(store => store.budgetTitle);
 
     //USE STATE
     const [forms, setForms] = useState({
@@ -67,7 +67,7 @@ function NeedsPage() {
 
     return (
         <>
-        <h1>Needs: {budgetID}</h1>
+        <h1>Needs: {budgetTitle}</h1>
         <form onSubmit={handleSubmit}>
         {/* START FORM */}
             {/* Dining Out */}

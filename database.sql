@@ -50,7 +50,7 @@ CREATE TABLE "BudgetComments" (
 CREATE TABLE "Budget" (
   "id" SERIAL PRIMARY KEY,
   "user_id" int NOT NULL,
-  "budget_id" VARCHAR(50) NOT NULL
+  "budgetTitle" VARCHAR(50) NOT NULL
 );
 
 

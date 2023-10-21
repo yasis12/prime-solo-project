@@ -11,15 +11,27 @@ function IncomePage() {
     //States
     const [otherIncomeForm, setOtherIncomeForm] = useState([{price:'', description: ''}]);
     const [wagesAfterTax, setWagesAfterTax] = useState({ price: '', description: '' });
+    const [budgetTitle, setBudgetTitle] = useState('');
+    
     const [budgetID, setBudgetID] = useState('');
 
     //Submit BudgetID
     const handleBudgetIDSubmit = (event) => {
         event.preventDefault();
+        //Dispatch BudgetID to the redux store
         dispatch({
-            type: 'SET_BUDGETID',
-            payload: budgetID
+            type: 'SET_TITLE',
+            payload: budgetTitle
         })
+        
+        // Make axios post request to send BudgetID to the server
+        axios.post('/api/budgetID', {budgetTitle})
+        .then((response) => {
+            console.log('BudgetID saved successfully');
+        })
+        .catch((error) => {
+            console.error('Error saving BudgetID to the server', error);
+        });
     };
 
     const handleSubmit = (event) => {
@@ -69,12 +81,12 @@ function IncomePage() {
         <form onSubmit={handleBudgetIDSubmit}>
             <h3>Name your Audit:</h3>
             <p>I recommened this be the Month and Year of the inputs you are using</p>
-            <input type="text" placeholder='January 2050' value={budgetID} onChange={(event) => setBudgetID(event.target.value)} />
+            <input type="text" placeholder='January 2050' value={budgetTitle} onChange={(event) => setBudgetTitle(event.target.value)} />
             <button type='submit'>Save BudgetID</button>
         </form>
         <br /><br /><br />
         {/* this is the Income Form: user will enter all income */}
-        <h3>INCOME: {budgetID}</h3>
+        <h3>INCOME: {budgetTitle}</h3>
          <form onSubmit={handleSubmit}>
             <div className='wagesAfterTax form-field'>
                 <label>Wages After Tax: </label>
