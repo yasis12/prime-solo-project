@@ -1,36 +1,29 @@
 import { useState } from 'react';
 import './AuditPage.css'
-import { useSelector } from 'react-redux';
 
 function AuditPage() {
-    // Store
-    const incomeArray = useSelector(store => store.income);
-    const needsArray = useSelector(store => store.needs);
-    const wantsArray = useSelector(store => store.wants);
-    const savingsDebtsArray = useSelector(store => store.savingsDebts);
-    console.log('Needs', needsArray);
-    console.log('Wants',wantsArray);
-    console.log('Savings & Debts', savingsDebtsArray);
-   
 
-    // Total Income data handling
-    const calulateTotalIncome = () => {
-        let totalIncome = 0;
-        // using parseFloat to ensure the data is a number
-        const wagesAfterTaxPrice = parseFloat(incomeArray.wagesAfterTax.price);
-        totalIncome += wagesAfterTaxPrice;
-        //looping through the other income form to add all the incomes
-        for (let i=0; i < incomeArray.otherIncomeForm.length; i++) {
-            const price = parseFloat(incomeArray.otherIncomeForm[i].price);
-            totalIncome += isNaN(price) ? 0 : price;
-        }
-        // This is all price inputs from income page 
-        return totalIncome;
-    };
 
-    const totalIncome = calulateTotalIncome();
-    console.log('total Income', totalIncome);
-    // End total income data handling
+
+    
+    // // Total Income data handling
+    // const calulateTotalIncome = () => {
+    //     let totalIncome = 0;
+    //     // using parseFloat to ensure the data is a number
+    //     const wagesAfterTaxPrice = parseFloat(incomeArray.wagesAfterTax.price);
+    //     totalIncome += wagesAfterTaxPrice;
+    //     //looping through the other income form to add all the incomes
+    //     for (let i=0; i < incomeArray.otherIncomeForm.length; i++) {
+    //         const price = parseFloat(incomeArray.otherIncomeForm[i].price);
+    //         totalIncome += isNaN(price) ? 0 : price;
+    //     }
+    //     // This is all price inputs from income page 
+    //     return totalIncome;
+    // };
+
+    // const totalIncome = calulateTotalIncome();
+    // console.log('total Income', totalIncome);
+    // // End total income data handling
 
     return (
         <>
@@ -38,7 +31,7 @@ function AuditPage() {
         <h3>STORE TEST: {}</h3>
         <h1>Audit Page</h1>
         <div className='monthlyIncome'>
-            <h3>Monthly Income: ${totalIncome}</h3> {/* the 2000 is a placeholder until store is created */}
+            <h3>Monthly Income: ${}</h3> {/* the 2000 is a placeholder until store is created */}
         </div>
         <div className='monthlySpending'>
             <h3>Monthly Spending: $2000{}</h3> {/* the 2000 is a placeholder until store is created */}
