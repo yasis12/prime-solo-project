@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './IncomePage.css'
 import { useHistory } from 'react-router-dom';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 
 function IncomePage() {
@@ -12,8 +12,8 @@ function IncomePage() {
     const [otherIncomeForm, setOtherIncomeForm] = useState([{price:'', description: ''}]);
     const [wagesAfterTax, setWagesAfterTax] = useState({ price: '', description: '' });
     const [budgetTitle, setBudgetTitle] = useState('');
-    
-    const [budgetID, setBudgetID] = useState('');
+    // Store
+    const budgetID = useSelector(store => store.budgetID)
 
     //Submit BudgetID
     const handleBudgetIDSubmit = (event) => {
@@ -27,7 +27,13 @@ function IncomePage() {
         // Make axios post request to send BudgetID to the server
         axios.post('/api/budgetID', {budgetTitle})
         .then((response) => {
-            console.log('BudgetID saved successfully');
+            const budgetID = response.data.budgetID;
+            console.log('BudgetID saved successfully', budgetID);
+            // dispatch budgetID to the store
+            dispatch({
+                type: 'SET_BUDGETID',
+                payload: budgetID
+            });
         })
         .catch((error) => {
             console.error('Error saving BudgetID to the server', error);

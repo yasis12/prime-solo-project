@@ -6,6 +6,7 @@ import needs from './needs.reducer';
 import wants from './wants.reducer';
 import savingsDebts from './savingsDebts.reducer';
 import budgetTitle from './budgetTitle.reducer';
+import budgetID from './budgetID.reducer';
 
 
 
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   needs,
   wants,
   savingsDebts,
-  budgetTitle
+  budgetTitle,
+  budgetID
 });
 
 export default rootReducer;
