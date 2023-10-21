@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './IncomePage.css'
 import { useHistory } from 'react-router-dom';
 import { useDispatch} from 'react-redux';
@@ -68,11 +68,13 @@ function IncomePage() {
         {/* Creating the Budget ID here. */}
         <form onSubmit={handleBudgetIDSubmit}>
             <h3>Name your Audit:</h3>
-            <p>I recommened this te be the Month and Year of the inputs you are using</p>
+            <p>I recommened this be the Month and Year of the inputs you are using</p>
             <input type="text" placeholder='January 2050' value={budgetID} onChange={(event) => setBudgetID(event.target.value)} />
             <button type='submit'>Save BudgetID</button>
         </form>
+        <br /><br /><br />
         {/* this is the Income Form: user will enter all income */}
+        <h3>INCOME: {budgetID}</h3>
          <form onSubmit={handleSubmit}>
             <div className='wagesAfterTax form-field'>
                 <label>Wages After Tax: </label>

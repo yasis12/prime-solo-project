@@ -61,7 +61,7 @@ function WantsPage() {
 
     return (
         <>
-        <h1>Wants Page</h1>
+        <h1>Wants: {budgetID}</h1>
         <form onSubmit={handleSubmit}>
         {/* START FORM */}
             {/* Dining Out */}

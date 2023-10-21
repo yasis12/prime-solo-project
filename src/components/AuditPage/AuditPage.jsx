@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import './AuditPage.css'
 
 function AuditPage() {
 
-
+    const budgetID = useSelector(store => store.budgetID);
 
     
     // // Total Income data handling
@@ -27,9 +28,8 @@ function AuditPage() {
 
     return (
         <>
-        
-        <h3>STORE TEST: {}</h3>
-        <h1>Audit Page</h1>
+
+        <h1>Audit: {budgetID}</h1>
         <div className='monthlyIncome'>
             <h3>Monthly Income: ${}</h3> {/* the 2000 is a placeholder until store is created */}
         </div>

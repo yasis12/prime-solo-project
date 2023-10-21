@@ -67,7 +67,7 @@ function NeedsPage() {
 
     return (
         <>
-        <h1>Needs Page</h1>
+        <h1>Needs: {budgetID}</h1>
         <form onSubmit={handleSubmit}>
         {/* START FORM */}
             {/* Dining Out */}

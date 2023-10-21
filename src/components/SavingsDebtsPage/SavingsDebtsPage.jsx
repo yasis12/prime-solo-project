@@ -61,7 +61,7 @@ function SavingsDebtsPage() {
     }
     return (
         <>
-        <h1>Savings & Debts</h1>
+        <h1>Savings & Debts: {budgetID}</h1>
         <form onSubmit={handleSubmit}>
         {/* START FORM */}
             {/* Dining Out */}
