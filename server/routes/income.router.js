@@ -15,39 +15,40 @@ router.post('/', (req, res) => {
 
     // Database insertion logic
     const insertPromises = [];
+
         // Insert wages after tax
         insertPromises.push(
             pool.query(
-                'INSERT INTO "Income" ("price", "description", "category", "user_id", "budget_id") VALUES($1, $2, $3, $4, $5)',
-                [
-                    parseInt(incomeData.wagesAfterTax.price),
-                    incomeData.wagesAfterTax.description,
-                    'wagesAfterTax', 
-                    userID,
-                    budgetID,
-                ]
+            'INSERT INTO "Income" ("price", "description", "category", "user_id", "budget_id") VALUES($1, $2, $3, $4, $5)',
+            [
+                parseInt(incomeData.wagesAfterTax.price),
+                incomeData.wagesAfterTax.description,
+                'wagesAfterTax',
+                userID,
+                budgetID,
+            ]
             )
         );
 
-    // Insert otherIncomeForm
-    if (incomeData.otherIncomeForm.length > 0) {
-        incomeData.otherIncomeForm.forEach((item) => {
+        // Insert otherIncomeForm
+        if (incomeData.otherIncomeForm.length > 0) {
+            incomeData.otherIncomeForm.forEach((item) => {
             if (item.price) {
                 insertPromises.push(
-                    pool.query(
-                        'INSERT INTO "Income" ("price", "description", "category", "user_id", "budget_id") VALUES($1, $2, $3, $4, $5)',
-                        [
-                            parseInt(item.price),
-                            item.description,
-                            'otherIncome', 
-                            userID,
-                            budgetID,
-                        ]
-                    )
+                pool.query(
+                    'INSERT INTO "Income" ("price", "description", "category", "user_id", "budget_id") VALUES($1, $2, $3, $4, $5)',
+                    [
+                    parseInt(item.price),
+                    item.description,
+                    'otherIncome',
+                    userID,
+                    budgetID,
+                    ]
+                )
                 );
             }
-        });
-    }
+            });
+        }
 
     Promise.all(insertPromises)
         .then(() => {
