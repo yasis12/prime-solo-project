@@ -41,7 +41,21 @@ router.post('/', (req, res) => {
   }); // END post Route
 
 router.get('/', (req, res) => {
-    // GET route code here
+       // GET route code here
+       const userID = req.user.id;
+ 
+       pool.query(
+         'SELECT * FROM "Wants" WHERE user_id = $1',
+         [userID]
+       )
+       .then((result) => {
+         const wantsData = result.rows;
+         res.send(wantsData);
+       })
+       .catch((error) => {
+         console.error('Error fetching Wants', error);
+         res.status(500).json({ error: 'An error occurred while fetching Wants' });
+       });
   });
 
 module.exports = router;

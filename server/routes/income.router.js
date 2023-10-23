@@ -64,8 +64,23 @@ router.post('/', (req, res) => {
 
 
 // Income GET route
-router.get('/income', (req, res) => {
-    // GET route code here
+router.get('/', (req, res) => {
+  // GET route code here
+  console.log('inside income get route');
+  const userID = req.user.id;
+
+  pool.query(
+    'SELECT * FROM "Income" WHERE user_id = $1',
+    [userID]
+  )
+  .then((result) => {
+    const incomeData = result.rows;
+    res.send(incomeData);
+  })
+  .catch((error) => {
+    console.error('Error fetching income', error);
+    res.status(500).json({ error: 'An error occurred while fetching income' });
+  });
   });
 
   module.exports = router;

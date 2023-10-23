@@ -24,7 +24,6 @@ router.post('/', (req, res) => {
 
 router.get('/', (req, res) => {
   // GET route code here
-  console.log('Inside Budget Get route');
   const userID = req.user.id;
 
   pool.query(

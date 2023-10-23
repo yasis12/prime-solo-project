@@ -16,10 +16,10 @@ function AuditPage() {
     // Use Effect
     useEffect(() => {
         fetchBudgets();
-        // fetchIncome();
-        // fetchNeeds();
-        // fetchSavingsDebts();
-        // fetchWants();
+        fetchIncome();
+        fetchNeeds();
+        fetchSavingsDebts();
+        fetchWants();
       }, []);
 
     //   //Budget Get Request
@@ -37,44 +37,48 @@ function AuditPage() {
         });
       }
 
-      // //income get request
-      // const fetchIncome = () => {
-      //   axios.get('/api/income').then((response) => {
-      //       setIncome(response.data);   
-      //   }).catch((error) => {
-      //     console.log('error fetching Income', error);
-      //     alert('Something went wrong.');
-      //   });
-      // }
-      // //Needs Get request
-      // const fetchNeeds = () => {
-      //   axios.get('/api/needs').then((response) => {
-      //       setNeeds(response.data);
-      //   }).catch((error) => {
-      //     console.log('error fetching Needs', error);
-      //     alert('Something went wrong.');
-      //   });
-      // }
+      //income get request
+      const fetchIncome = () => {
+        axios.get('/api/income').then((response) => {
+          console.log('income data:', response.data);
+            setIncome(response.data);   
+        }).catch((error) => {
+          console.log('error fetching Income', error);
+          alert('Something went wrong.');
+        });
+      }
+      //Needs Get request
+      const fetchNeeds = () => {
+        axios.get('/api/needs').then((response) => {
+          console.log('needs data:', response.data);
+            setNeeds(response.data);
+        }).catch((error) => {
+          console.log('error fetching Needs', error);
+          alert('Something went wrong.');
+        });
+      }
 
-      // //Wants Get request
-      // const fetchWants = () => {
-      //   axios.get('/api/wants').then((response) => {
-      //       setWants(response.data);
-      //   }).catch((error) => {
-      //     console.log('error fetching Wants', error);
-      //     alert('Something went wrong.');
-      //   });
-      // }
+      //Wants Get request
+      const fetchWants = () => {
+        axios.get('/api/wants').then((response) => {
+          console.log('Wants data:', response.data);
+            setWants(response.data);
+        }).catch((error) => {
+          console.log('error fetching Wants', error);
+          alert('Something went wrong.');
+        });
+      }
 
-      // //Savings and debts get request
-      // const fetchSavingsDebts = () => {
-      //   axios.get('/api/savingsdebts').then((response) => {
-      //       setSavingsDebts(response.data);
-      //   }).catch((error) => {
-      //     console.log('error fetching savings & Debts', error);
-      //     alert('Something went wrong.');
-      //   });
-      // }
+      //Savings and debts get request
+      const fetchSavingsDebts = () => {
+        axios.get('/api/savingsdebts').then((response) => {
+          console.log('Savings & Debts data:', response.data);
+            setSavingsDebts(response.data);
+        }).catch((error) => {
+          console.log('error fetching savings & Debts', error);
+          alert('Something went wrong.');
+        });
+      }
 
 
       const handleBudgetSelect = (budgetId) => {
