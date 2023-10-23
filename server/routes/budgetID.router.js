@@ -24,6 +24,21 @@ router.post('/', (req, res) => {
 
 router.get('/', (req, res) => {
   // GET route code here
+  console.log('Inside Budget Get route');
+  const userID = req.user.id;
+
+  pool.query(
+    'SELECT "id", "budgetTitle" FROM "Budget" WHERE user_id = $1',
+    [userID]
+  )
+  .then((result) => {
+    const budgets = result.rows;
+    res.send(budgets);
+  })
+  .catch((error) => {
+    console.error('Error fetching budgets', error);
+    res.status(500).json({ error: 'An error occurred while fetching budgets' });
+  });
 });
 
 

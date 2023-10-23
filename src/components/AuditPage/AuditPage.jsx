@@ -1,12 +1,86 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './AuditPage.css'
+import axios from 'axios';
 
 function AuditPage() {
 
     const budgetTitle = useSelector(store => store.budgetTitle);
+    const [budgets, setBudgets] = useState([]);
+    const [selectedBudget, setSelectedBudget] = useState(null);
+    const [income, setIncome] = useState('');
+    const [needs, setNeeds] = useState('');
+    const [wants, setWants] = useState('');
+    const [savingDebts, setSavingsDebts] = useState('');
 
-    
+    // Use Effect
+    useEffect(() => {
+        fetchBudgets();
+        // fetchIncome();
+        // fetchNeeds();
+        // fetchSavingsDebts();
+        // fetchWants();
+      }, []);
+
+    //   //Budget Get Request
+      const fetchBudgets = () => {
+        axios.get('/api/budgetID').then((response) => {
+          console.log('Fetched Budgets', response.data);
+            setBudgets(response.data);
+        // Set the default budget, e.g., the first budget from the list
+        if (response.data.length > 0) {
+          setSelectedBudget(response.data[0].id);
+        }
+        }).catch((error) => {
+          console.log('error fetching budgets', error);
+          alert('Something went wrong.');
+        });
+      }
+
+      // //income get request
+      // const fetchIncome = () => {
+      //   axios.get('/api/income').then((response) => {
+      //       setIncome(response.data);   
+      //   }).catch((error) => {
+      //     console.log('error fetching Income', error);
+      //     alert('Something went wrong.');
+      //   });
+      // }
+      // //Needs Get request
+      // const fetchNeeds = () => {
+      //   axios.get('/api/needs').then((response) => {
+      //       setNeeds(response.data);
+      //   }).catch((error) => {
+      //     console.log('error fetching Needs', error);
+      //     alert('Something went wrong.');
+      //   });
+      // }
+
+      // //Wants Get request
+      // const fetchWants = () => {
+      //   axios.get('/api/wants').then((response) => {
+      //       setWants(response.data);
+      //   }).catch((error) => {
+      //     console.log('error fetching Wants', error);
+      //     alert('Something went wrong.');
+      //   });
+      // }
+
+      // //Savings and debts get request
+      // const fetchSavingsDebts = () => {
+      //   axios.get('/api/savingsdebts').then((response) => {
+      //       setSavingsDebts(response.data);
+      //   }).catch((error) => {
+      //     console.log('error fetching savings & Debts', error);
+      //     alert('Something went wrong.');
+      //   });
+      // }
+
+
+      const handleBudgetSelect = (budgetId) => {
+        setSelectedBudget(budgetId);
+      };
+
     // // Total Income data handling
     // const calulateTotalIncome = () => {
     //     let totalIncome = 0;
@@ -28,7 +102,18 @@ function AuditPage() {
 
     return (
         <>
+            <select onChange={(event) => handleBudgetSelect(event.target.value)}>
+                {budgets.map((budget) => (
+                    <option key={budget.id} value={budget.id}>
+                        {budget.budgetTitle}
+                    </option>
+                ))}
+             </select>
 
+            <h3>selected budget: {selectedBudget}</h3>
+
+
+          <p>end test</p>  
         <h1>Audit: {budgetTitle}</h1>
         <div className='monthlyIncome'>
             <h3>Monthly Income: ${}</h3> {/* the 2000 is a placeholder until store is created */}
