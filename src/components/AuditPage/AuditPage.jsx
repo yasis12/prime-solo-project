@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './AuditPage.css'
 import axios from 'axios';
+import logger from 'redux-logger';
 
 function AuditPage() {
 
@@ -21,8 +22,9 @@ function AuditPage() {
         fetchSavingsDebts();
         fetchWants();
       }, []);
-
-    //   //Budget Get Request
+    
+    
+      //Budget Get Request
       const fetchBudgets = () => {
         axios.get('/api/budgetID').then((response) => {
           console.log('Fetched Budgets', response.data);
@@ -36,7 +38,6 @@ function AuditPage() {
           alert('Something went wrong.');
         });
       }
-
       //income get request
       const fetchIncome = () => {
         axios.get('/api/income').then((response) => {
@@ -57,7 +58,6 @@ function AuditPage() {
           alert('Something went wrong.');
         });
       }
-
       //Wants Get request
       const fetchWants = () => {
         axios.get('/api/wants').then((response) => {
@@ -68,7 +68,6 @@ function AuditPage() {
           alert('Something went wrong.');
         });
       }
-
       //Savings and debts get request
       const fetchSavingsDebts = () => {
         axios.get('/api/savingsdebts').then((response) => {
@@ -80,29 +79,35 @@ function AuditPage() {
         });
       }
 
+   
 
+      // Total Monthly Income
+      const totalMonthlyIncome = (incomeData, selectedBudget) => {
+        if (!Array.isArray(incomeData)) {
+          return 0; // Return a default value or handle the error accordingly
+        }
+        // Filter income items for the selected budget
+        const filteredIncome = incomeData.filter((item) => item.budget_id === selectedBudget);
+
+        // Calculate the total income for the selected budget
+        const totalIncome = filteredIncome.reduce((total, item) => total + item.price, 0);
+
+        return totalIncome;
+      };
+      // Total Needs
+
+      // Total Wants
+
+      // Total Savings & Debts
+
+      // Total Monthly Spending
       const handleBudgetSelect = (budgetId) => {
         setSelectedBudget(budgetId);
       };
 
-    // // Total Income data handling
-    // const calulateTotalIncome = () => {
-    //     let totalIncome = 0;
-    //     // using parseFloat to ensure the data is a number
-    //     const wagesAfterTaxPrice = parseFloat(incomeArray.wagesAfterTax.price);
-    //     totalIncome += wagesAfterTaxPrice;
-    //     //looping through the other income form to add all the incomes
-    //     for (let i=0; i < incomeArray.otherIncomeForm.length; i++) {
-    //         const price = parseFloat(incomeArray.otherIncomeForm[i].price);
-    //         totalIncome += isNaN(price) ? 0 : price;
-    //     }
-    //     // This is all price inputs from income page 
-    //     return totalIncome;
-    // };
-
-    // const totalIncome = calulateTotalIncome();
-    // console.log('total Income', totalIncome);
-    // // End total income data handling
+      console.log('Income',income);
+      console.log('Budget ID', selectedBudget);
+      console.log('Total Monthly Income', totalMonthlyIncome(income,selectedBudget));
 
     return (
         <>
@@ -114,20 +119,23 @@ function AuditPage() {
                 ))}
              </select>
 
-            <h3>selected budget: {selectedBudget}</h3>
+
+             <button onClick={totalMonthlyIncome(income,selectedBudget)}>Hello</button>
+
+             <h3>TEST VALUE: ${}</h3>
 
 
           <p>end test</p>  
         <h1>Audit: {budgetTitle}</h1>
         <div className='monthlyIncome'>
-            <h3>Monthly Income: ${}</h3> {/* the 2000 is a placeholder until store is created */}
+            {/* <h3>Monthly Income: ${}</h3> the 2000 is a placeholder until store is created  */}
         </div>
         <div className='monthlySpending'>
             <h3>Monthly Spending: $2000{}</h3> {/* the 2000 is a placeholder until store is created */}
         </div>
-        {/* 
+  
         50/30/20 section intended to show the user what category they need to focus on when over spending
-        */}
+      
         <div className='fiftyThirtyTwenty'>
             <div id='budgetTitle'>
                 <h3>How does your spending compare to the recommened 50/30/20 Budget</h3>
