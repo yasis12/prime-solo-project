@@ -40,6 +40,24 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/all', (req, res) => {
+  // GET route code here
+  const userID = req.user.id;
+
+  pool.query(
+    'SELECT "budgetTitle" FROM "Budget" WHERE user_id = $1',
+    [userID]
+  )
+  .then((result) => {
+    const budgets = result.rows;
+    res.send(budgets);
+  })
+  .catch((error) => {
+    console.error('Error fetching budgets', error);
+    res.status(500).json({ error: 'An error occurred while fetching budgets' });
+  });
+});
+
 
 
 module.exports = router;

@@ -14,6 +14,7 @@ const needsRouter = require('./routes/needs.router');
 const wantsRouter = require('./routes/wants.router');
 const savingsDebtsRouter = require('./routes/savingsDebts.router');
 const budgetIDRouter = require('./routes/budgetID.router');
+const commentsRouter = require('./routes/comments.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -33,6 +34,7 @@ app.use('/api/needs', needsRouter);
 app.use('/api/wants', wantsRouter);
 app.use('/api/savingsdebts', savingsDebtsRouter);
 app.use('/api/budgetID', budgetIDRouter);
+app.use('/api/comments', commentsRouter);
 
 // Serve static files
 app.use(express.static('build'));
