@@ -55,24 +55,13 @@ CREATE TABLE "Budget" (
 
 
 ALTER TABLE "Budget" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
-
 ALTER TABLE "Income" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
-
 ALTER TABLE "Income" ADD FOREIGN KEY ("budget_id") REFERENCES "Budget" ("id");
-
 ALTER TABLE "Needs" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
-
 ALTER TABLE "Needs" ADD FOREIGN KEY ("budget_id") REFERENCES "Budget" ("id");
-
 ALTER TABLE "Wants" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
-
 ALTER TABLE "Wants" ADD FOREIGN KEY ("budget_id") REFERENCES "Budget" ("id");
-
 ALTER TABLE "SavingsDebts" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
-
 ALTER TABLE "SavingsDebts" ADD FOREIGN KEY ("budget_id") REFERENCES "Budget" ("id");
-
 ALTER TABLE "BudgetComments" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
-
 ALTER TABLE "BudgetComments" ADD FOREIGN KEY ("budget_id") REFERENCES "Budget" ("id");
-

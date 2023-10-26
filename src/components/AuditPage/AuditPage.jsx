@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './AuditPage.css'
 import axios from 'axios';
+import { number } from 'prop-types';
 
 function AuditPage() {
 
     // Store
     const budgetTitle = useSelector(store => store.budgetTitle);
     // const budgetID = useSelector(store => store.budgetID)
-    const budgetID = 8;
+    const budgetID = 14;
     // States for calculations
     const [budgets, setBudgets] = useState([]);
     const [income, setIncome] = useState([]);
@@ -88,40 +89,46 @@ function AuditPage() {
       // Total Needs
       const totalMonthlyNeeds = (needsData, selectedBudget) => {
         // Filter needs items for the selected budget
-        const filteredIncome = needsData.filter((item) => item.budget_id === selectedBudget);
+        const filteredNeeds = needsData.filter((item) => item.budget_id === selectedBudget);
         // Calculate the total income for the selected budget
-        const totalIncome = filteredIncome.reduce((total, item) => total + item.price, 0);
-        return totalIncome;
+        const totalNeeds = filteredNeeds.reduce((total, item) => total + item.price, 0);
+        return totalNeeds;
       };
       // Total Wants
       const totalMonthlyWants = (wantsData, selectedBudget) => {
         // Filter needs items for the selected budget
-        const filteredIncome = wantsData.filter((item) => item.budget_id === selectedBudget);
+        const filteredWants = wantsData.filter((item) => item.budget_id === selectedBudget);
         // Calculate the total income for the selected budget
-        const totalIncome = filteredIncome.reduce((total, item) => total + item.price, 0);
-        return totalIncome;
+        const totalWants = filteredWants.reduce((total, item) => total + item.price, 0);
+        return totalWants;
       };
       // Total Savings & Debts
       const totalMonthlySavingsDebts = (savingsDebtsData, selectedBudget) => {
         // Filter needs items for the selected budget
-        const filteredIncome = savingsDebtsData.filter((item) => item.budget_id === selectedBudget);
+        const filteredSavingsDebts = savingsDebtsData.filter((item) => item.budget_id === selectedBudget);
         // Calculate the total income for the selected budget
-        const totalIncome = filteredIncome.reduce((total, item) => total + item.price, 0);
-        return totalIncome;
+        const totalSavingsDebts = filteredSavingsDebts.reduce((total, item) => total + item.price, 0);
+        return totalSavingsDebts;
       };
-      // Total Monthly Spending
-      
 
       //! calculations OUTPUTS
-      const monthlyIncome= totalMonthlyIncome(income, budgetID);
+      const monthlyIncome = totalMonthlyIncome(income, budgetID);
       const monthlyNeeds = totalMonthlyNeeds(needs, budgetID);
       const monthlyWants = totalMonthlyWants(wants, budgetID);
       const savingsDebts = totalMonthlySavingsDebts(savingDebts, budgetID);
 
-      // console.log('total monthly income',  totalMonthlyIncome(income, budgetID));
-      // console.log('total monthly Needs',  totalMonthlyNeeds(needs, budgetID));
-      // console.log('total monthly Wants',  totalMonthlyWants(wants, budgetID));
-      // console.log('total monthly Savings & Debts',  totalMonthlyIncome(income, budgetID));
+      // Total Monthly Spending
+      const totalMonthlySpending = Number(monthlyNeeds) + Number(monthlyWants) + Number(savingsDebts);
+      // Percent of monthly income 
+      const needsPercent = monthlyNeeds / monthlyIncome;
+      const wantsPercent = monthlyWants / monthlyIncome;
+      const savingsDebtsPercent = savingsDebts / monthlyIncome;
+      
+
+      console.log('total monthly income',  totalMonthlyIncome(income, budgetID));
+      console.log('total monthly Needs',  totalMonthlyNeeds(needs, budgetID));
+      console.log('total monthly Wants',  totalMonthlyWants(wants, budgetID));
+      console.log('total monthly Savings & Debts',  totalMonthlyIncome(income, budgetID));
 
     return (
         <>
@@ -130,26 +137,29 @@ function AuditPage() {
             <h3>Monthly Income: ${monthlyIncome}</h3> 
         </div>
         <div className='monthlySpending'>
-            <h3>Monthly Spending: $2000{}</h3> {/* the 2000 is a placeholder until store is created */}
+            <h3>Monthly Spending: ${totalMonthlySpending}</h3> 
         </div>
   
-        50/30/20 section intended to show the user what category they need to focus on when over spending
+        {/* 50/30/20 section intended to show the user what category they need to focus on when over spending */}
       
         <div className='fiftyThirtyTwenty'>
             <div id='budgetTitle'>
                 <h3>How does your spending compare to the recommened 50/30/20 Budget</h3>
             </div>
             <div id='needs'>
-                <h4>50 Needs</h4>  {/* Stretch feature add the ability to change the 50 to what ever you want */}
-                <h4>${monthlyNeeds}</h4> {/* the 1000 is a placeholder until store is created */}
+                <h4>50 Needs</h4>  
+                <h3>Your Percent %{needsPercent}</h3>
+                <h4>${monthlyNeeds}</h4> 
             </div>
             <div id='wants'>
-                <h4>30 Wants</h4>  {/* Stretch feature add the ability to change the 50 to what ever you want */}
-                <h4>$1000{monthlyWants}</h4> {/* the 1000 is a placeholder until store is created */}
+                <h4>30 Wants</h4>  
+                <h3>Your Percent %{wantsPercent}</h3>
+                <h4>${monthlyWants}</h4> 
             </div>
             <div id='savingsDebts'>
-                <h4>20 Savings & Debt Payments</h4>  {/* Stretch feature add the ability to change the 50 to what ever you want */}
-                <h4>$500{savingsDebts}</h4> {/* the 500 is a placeholder until store is created */}
+                <h4>20 Savings & Debt Payments</h4> 
+                <h3>Your Percent %{savingsDebtsPercent}</h3> 
+                <h4>${savingsDebts}</h4> 
             </div>
         </div>
 
