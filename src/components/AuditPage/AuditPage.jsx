@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './AuditPage.css'
 import axios from 'axios';
-import { number } from 'prop-types';
 import CategorizedSpending from '../CategorizedSpending/CategorizedSpending';
 
 function AuditPage() {
 
     // Store
     const budgetTitle = useSelector(store => store.budgetTitle);
-    // const budgetID = useSelector(store => store.budgetID)
+    //! const budgetID = useSelector(store => store.budgetID)
     const budgetID = 14;
     // States for calculations
     const [budgets, setBudgets] = useState([]);
@@ -78,7 +77,7 @@ function AuditPage() {
         });
       }
 
-      //! CALCULATIONS
+      //? CALCULATIONS
       // Total Monthly Income
       const totalMonthlyIncome = (incomeData, selectedBudget) => {
         // Filter income items for the selected budget
@@ -104,33 +103,69 @@ function AuditPage() {
         return totalWants;
       };
       // Total Savings & Debts
-      const totalMonthlySavingsDebts = (savingsDebtsData, selectedBudget) => {
+      const totalMonthlySavings = (savingsDebtsData, selectedBudget) => {
+        const allowedCategories = [
+          'emergancyFundContributions',
+          'savingsAccountsContributions',
+          'workRetirementContributions',
+          'individualRetirement',
+          'excessLoanPayments',
+          'creditCardPayment',
+          'studentLoan',
+          'other'
+        ];
         // Filter needs items for the selected budget
-        const filteredSavingsDebts = savingsDebtsData.filter((item) => item.budget_id === selectedBudget);
+        const filteredSavings = savingsDebtsData.filter((item) => {
+          return item.budget_id === selectedBudget && allowedCategories.includes(item.category);
+        });
         // Calculate the total income for the selected budget
-        const totalSavingsDebts = filteredSavingsDebts.reduce((total, item) => total + item.price, 0);
-        return totalSavingsDebts;
+        const totalSavings = filteredSavings.reduce((total, item) => total + item.price, 0);
+        return totalSavings;
+      };
+      //Total Debt calculation
+      const totalDebts = (savingsDebtsData, selectedBudget) => {
+        const allowedCategories = [
+          'debts'
+        ];
+        // Filter needs items for the selected budget
+        const filteredDebts = savingsDebtsData.filter((item) => {
+          return item.budget_id === selectedBudget && allowedCategories.includes(item.category);
+        });
+        // Calculate the total income for the selected budget
+        const totalDebts = filteredDebts.reduce((total, item) => total + item.price, 0);
+        return totalDebts;
       };
 
-      //! calculations OUTPUTS
+      //* calculations OUTPUTS
       const monthlyIncome = totalMonthlyIncome(income, budgetID);
       const monthlyNeeds = totalMonthlyNeeds(needs, budgetID);
       const monthlyWants = totalMonthlyWants(wants, budgetID);
-      const savingsDebts = totalMonthlySavingsDebts(savingDebts, budgetID);
+      const savingsDebts = totalMonthlySavings(savingDebts, budgetID);
+      const debtsTotal = totalDebts(savingDebts, budgetID);
 
       // Total Monthly Spending
       const totalMonthlySpending = Number(monthlyNeeds) + Number(monthlyWants) + Number(savingsDebts);
-      const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
+      //! const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
+      const moneyLeftOver = -10;
+
+      // How long to pay of debts (not including interest) if every month was like the one audited
+      const howLongToPayOffDebts = () => {
+        if (moneyLeftOver < 0) {
+          return 'NEVER IN A MILLION';
+        } else {
+          return debtsTotal / moneyLeftOver;
+        }
+      }
+      
+      const timeToPayDebtsDisplay = howLongToPayOffDebts();
       // Percent of monthly income 
       const needsPercent = monthlyNeeds / monthlyIncome;
       const wantsPercent = monthlyWants / monthlyIncome;
       const savingsDebtsPercent = savingsDebts / monthlyIncome;
-      
 
-      console.log('total monthly income',  totalMonthlyIncome(income, budgetID));
-      console.log('total monthly Needs',  totalMonthlyNeeds(needs, budgetID));
-      console.log('total monthly Wants',  totalMonthlyWants(wants, budgetID));
-      console.log('total monthly Savings & Debts',  totalMonthlyIncome(income, budgetID));
+      //todo: Complete categorized spending component
+
+      //todo: Format the percantages so they are not so long
 
     return (
         <>
@@ -164,8 +199,8 @@ function AuditPage() {
                 <h4>${savingsDebts}</h4> 
             </div>
         </div>
-
-        {/* <CategorizedSpending />  This is a stretch goal now*/}
+        
+        {/* <CategorizedSpending />  This is a stretch goal now */}
         
         {/* This section will demonstrate (with out interest) how long it will take to pay off current debts. If there are no current debts it well say congragts */}
         <div className='debtCalculator'>
@@ -175,11 +210,11 @@ function AuditPage() {
             </div>
             <div id='totalDebts'>
                 <h4>Total Debts</h4>
-                <h3>{}$10000</h3> {/* placeholder until store is used */}
+                <h3>${debtsTotal}</h3> {/* placeholder until store is used */}
             </div>
             <div id='timeToPayDebts'>
                 <h4>Given your spending and money left over at the end of the month ( not factoring in interest ) it would take you approximately</h4>
-                <h3> {}100 YEARS</h3> {/* placeholder until store is used */}
+                <h3> {timeToPayDebtsDisplay} YEARS to pay off debts</h3> {/* placeholder until store is used */}
                 <h3>To pay of your Debts</h3>
             </div>
         </div>
