@@ -23,15 +23,40 @@ function BudgetComments() {
       const fetchComments = () => {
         axios.get('/api/comments').then((response) => {
           console.log('Fetched comments', response.data);
-          setComment(response.data);
+          setComments(response.data);
         }).catch((error) => {
           console.log('error fetching budgets', error);
           alert('Something went wrong.');
         });
       }
 
+      // Edit Comment Function
+      const handleEditComment = (commentId, updatedComment) => {
+        axios.put(`/api/comments/${commentId}`, { comment: updatedComment })
+          .then((response) => {
+            // Handle the update in your UI
+          })
+          .catch((error) => {
+            console.log('Error editing comment', error);
+          });
+      };
+
+    // Delete Comment Function
+    const handleDeleteComment = (commentId) => {
+      axios.delete(`/api/comments/${commentId}`)
+        .then((response) => {
+          // Handle the deletion in your UI
+        })
+        .catch((error) => {
+          console.log('Error deleting comment', error);
+        });
+    };
+
+
+
       useEffect(() => {
         fetchBudgets();
+        fetchComments();
       }, []);
     
     const handleSubmit = () => {
