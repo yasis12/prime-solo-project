@@ -49,8 +49,8 @@ router.delete('/:id', (req,res) => {
 
 // Update Route
 
-router.update('/:id', (res, req) => {
+// router.update('/:id', (res, req) => {
 
-});
+// });
 
 module.exports = router;

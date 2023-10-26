@@ -2,19 +2,21 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './AuditPage.css'
 import axios from 'axios';
-import logger from 'redux-logger';
 
 function AuditPage() {
 
+    // Store
     const budgetTitle = useSelector(store => store.budgetTitle);
+    // const budgetID = useSelector(store => store.budgetID)
+    const budgetID = 8;
+    // States for calculations
     const [budgets, setBudgets] = useState([]);
-    const [selectedBudget, setSelectedBudget] = useState(null);
-    const [income, setIncome] = useState('');
-    const [needs, setNeeds] = useState('');
-    const [wants, setWants] = useState('');
-    const [savingDebts, setSavingsDebts] = useState('');
+    const [income, setIncome] = useState([]);
+    const [needs, setNeeds] = useState([]);
+    const [wants, setWants] = useState([]);
+    const [savingDebts, setSavingsDebts] = useState([]);
 
-    // Use Effect
+    // UseEffect
     useEffect(() => {
         fetchBudgets();
         fetchIncome();
@@ -23,16 +25,11 @@ function AuditPage() {
         fetchWants();
       }, []);
     
-    
       //Budget Get Request
       const fetchBudgets = () => {
         axios.get('/api/budgetID').then((response) => {
           console.log('Fetched Budgets', response.data);
             setBudgets(response.data);
-        // Set the default budget, e.g., the first budget from the list
-        if (response.data.length > 0) {
-          setSelectedBudget(response.data[0].id);
-        }
         }).catch((error) => {
           console.log('error fetching budgets', error);
           alert('Something went wrong.');
@@ -79,56 +76,58 @@ function AuditPage() {
         });
       }
 
-   
-
+      //! CALCULATIONS
       // Total Monthly Income
       const totalMonthlyIncome = (incomeData, selectedBudget) => {
-        if (!Array.isArray(incomeData)) {
-          return 0; // Return a default value or handle the error accordingly
-        }
         // Filter income items for the selected budget
         const filteredIncome = incomeData.filter((item) => item.budget_id === selectedBudget);
-
         // Calculate the total income for the selected budget
         const totalIncome = filteredIncome.reduce((total, item) => total + item.price, 0);
-
         return totalIncome;
       };
       // Total Needs
-
-      // Total Wants
-
-      // Total Savings & Debts
-
-      // Total Monthly Spending
-      const handleBudgetSelect = (budgetId) => {
-        setSelectedBudget(budgetId);
+      const totalMonthlyNeeds = (needsData, selectedBudget) => {
+        // Filter needs items for the selected budget
+        const filteredIncome = needsData.filter((item) => item.budget_id === selectedBudget);
+        // Calculate the total income for the selected budget
+        const totalIncome = filteredIncome.reduce((total, item) => total + item.price, 0);
+        return totalIncome;
       };
+      // Total Wants
+      const totalMonthlyWants = (wantsData, selectedBudget) => {
+        // Filter needs items for the selected budget
+        const filteredIncome = wantsData.filter((item) => item.budget_id === selectedBudget);
+        // Calculate the total income for the selected budget
+        const totalIncome = filteredIncome.reduce((total, item) => total + item.price, 0);
+        return totalIncome;
+      };
+      // Total Savings & Debts
+      const totalMonthlySavingsDebts = (savingsDebtsData, selectedBudget) => {
+        // Filter needs items for the selected budget
+        const filteredIncome = savingsDebtsData.filter((item) => item.budget_id === selectedBudget);
+        // Calculate the total income for the selected budget
+        const totalIncome = filteredIncome.reduce((total, item) => total + item.price, 0);
+        return totalIncome;
+      };
+      // Total Monthly Spending
+      
 
-      console.log('Income',income);
-      console.log('Budget ID', selectedBudget);
-      console.log('Total Monthly Income', totalMonthlyIncome(income,selectedBudget));
+      //! calculations OUTPUTS
+      const monthlyIncome= totalMonthlyIncome(income, budgetID);
+      const monthlyNeeds = totalMonthlyNeeds(needs, budgetID);
+      const monthlyWants = totalMonthlyWants(wants, budgetID);
+      const savingsDebts = totalMonthlySavingsDebts(savingDebts, budgetID);
+
+      // console.log('total monthly income',  totalMonthlyIncome(income, budgetID));
+      // console.log('total monthly Needs',  totalMonthlyNeeds(needs, budgetID));
+      // console.log('total monthly Wants',  totalMonthlyWants(wants, budgetID));
+      // console.log('total monthly Savings & Debts',  totalMonthlyIncome(income, budgetID));
 
     return (
         <>
-            <select onChange={(event) => handleBudgetSelect(event.target.value)}>
-                {budgets.map((budget) => (
-                    <option key={budget.id} value={budget.id}>
-                        {budget.budgetTitle}
-                    </option>
-                ))}
-             </select>
-
-
-             <button onClick={totalMonthlyIncome(income,selectedBudget)}>Hello</button>
-
-             <h3>TEST VALUE: ${}</h3>
-
-
-          <p>end test</p>  
         <h1>Audit: {budgetTitle}</h1>
         <div className='monthlyIncome'>
-            {/* <h3>Monthly Income: ${}</h3> the 2000 is a placeholder until store is created  */}
+            <h3>Monthly Income: ${monthlyIncome}</h3> 
         </div>
         <div className='monthlySpending'>
             <h3>Monthly Spending: $2000{}</h3> {/* the 2000 is a placeholder until store is created */}
@@ -141,16 +140,16 @@ function AuditPage() {
                 <h3>How does your spending compare to the recommened 50/30/20 Budget</h3>
             </div>
             <div id='needs'>
-                <h4>{}50 Needs</h4>  {/* Stretch feature add the ability to change the 50 to what ever you want */}
-                <h4>$1000{}</h4> {/* the 1000 is a placeholder until store is created */}
+                <h4>50 Needs</h4>  {/* Stretch feature add the ability to change the 50 to what ever you want */}
+                <h4>${monthlyNeeds}</h4> {/* the 1000 is a placeholder until store is created */}
             </div>
             <div id='wants'>
-                <h4>{}30 Wants</h4>  {/* Stretch feature add the ability to change the 50 to what ever you want */}
-                <h4>$1000{}</h4> {/* the 1000 is a placeholder until store is created */}
+                <h4>30 Wants</h4>  {/* Stretch feature add the ability to change the 50 to what ever you want */}
+                <h4>$1000{monthlyWants}</h4> {/* the 1000 is a placeholder until store is created */}
             </div>
             <div id='savingsDebts'>
-                <h4>{}20 Savings & Debt Payments</h4>  {/* Stretch feature add the ability to change the 50 to what ever you want */}
-                <h4>$500{}</h4> {/* the 500 is a placeholder until store is created */}
+                <h4>20 Savings & Debt Payments</h4>  {/* Stretch feature add the ability to change the 50 to what ever you want */}
+                <h4>$500{savingsDebts}</h4> {/* the 500 is a placeholder until store is created */}
             </div>
         </div>
 
