@@ -120,6 +120,7 @@ function AuditPage() {
 
       // Total Monthly Spending
       const totalMonthlySpending = Number(monthlyNeeds) + Number(monthlyWants) + Number(savingsDebts);
+      const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
       // Percent of monthly income 
       const needsPercent = monthlyNeeds / monthlyIncome;
       const wantsPercent = monthlyWants / monthlyIncome;
@@ -170,7 +171,7 @@ function AuditPage() {
         <div className='debtCalculator'>
             <div id='moneyLeftEOM'>
                 <h4>Money leftover at the end of the Month</h4>
-                <h3>{}$100</h3> {/* placeholder until store is used */}
+                <h3>${moneyLeftOver}</h3> {/* placeholder until store is used */}
             </div>
             <div id='totalDebts'>
                 <h4>Total Debts</h4>
