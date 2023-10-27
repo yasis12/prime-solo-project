@@ -1,0 +1,9 @@
+.user-page{
+    background-color: rgba(255, 255, 255, 0.5);
+    background-image: url('https://t4.ftcdn.net/jpg/02/15/53/17/240_F_215531776_MXesXNIqCZlrv336KOmyBTeTViMrVoSi.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 100vh; 
+    /* Other styling for the userPage-container */
+  }

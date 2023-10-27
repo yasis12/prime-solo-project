@@ -2,6 +2,7 @@ import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './UserPage.css';
 
 function UserPage() {
   const user = useSelector((store) => store.user);
@@ -16,7 +17,7 @@ function UserPage() {
   };
 
   return (
-    <div className="container">
+    <div className="container user-page">
       <h2>Welcome to Budget Buddy {user.username}!</h2>
       <p>You are user number: {user.id}</p>
       <p>Are you ready to better your financial future?</p>

@@ -79,7 +79,7 @@ function IncomePage() {
     const nextPage = () => {
         history.push('/needs')
     }
-    
+    //todo: Add Tool tips to each input
     return (
         <>
         <h1>Income Page</h1>

@@ -10,8 +10,8 @@ function AuditPage() {
     const history = useHistory();
     // Store
     const budgetTitle = useSelector(store => store.budgetTitle);
-    // const budgetID = useSelector(store => store.budgetID)
-    const budgetID = 16;
+    // const budgetID = useSelector(store => store.budgetID);
+    const budgetID = 17;
     // States for calculations
     const [budgets, setBudgets] = useState([]);
     const [income, setIncome] = useState([]);
@@ -165,9 +165,10 @@ function AuditPage() {
       const wantsPercent = (monthlyWants / monthlyIncome * 100).toFixed(); // Two decimal places
       const savingsDebtsPercent = (savingsDebts / monthlyIncome * 100).toFixed(); // Two decimal places
 
-      //todo: Complete categorized spending component
-
-      //todo: Format the percantages so they are not so long
+     
+      //todo: Styling
+      //todo: Tool Tips
+       //todo: Complete categorized spending component
 
       const additionalResources = () => {
         history.push('/resources');

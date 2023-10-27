@@ -60,6 +60,8 @@ function WantsPage() {
         history.push('/savingsdebts')
     }
 
+    //todo: Add Tool tips to each input
+
     return (
         <>
         <h1>Wants: {budgetTitle}</h1>

@@ -1,5 +1,7 @@
 
 function CategorizedSpending() {
+
+  //todo: make this component function properly and not just be place holders
   
     return (
         <>

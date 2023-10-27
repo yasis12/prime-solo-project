@@ -60,6 +60,9 @@ function SavingsDebtsPage() {
     const nextPage = () => {
         history.push('/audit')
     }
+
+    //todo: Add Tool tips to each input
+
     return (
         <>
         <h1>Savings & Debts: {budgetTitle}</h1>

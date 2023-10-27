@@ -66,6 +66,8 @@ function NeedsPage() {
         history.push('/wants')
     }
 
+    //todo: Add Tool tips to each input
+
     return (
         <>
         <h1>Needs: {budgetTitle}</h1>
