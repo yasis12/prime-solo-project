@@ -66,7 +66,6 @@ router.post('/', (req, res) => {
 // Income GET route
 router.get('/', (req, res) => {
   // GET route code here
-  console.log('inside income get route');
   const userID = req.user.id;
 
   pool.query(

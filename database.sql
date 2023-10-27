@@ -42,6 +42,7 @@ CREATE TABLE "SavingsDebts" (
 );
 
 CREATE TABLE "BudgetComments" (
+  "id" SERIAL PRIMARY KEY,
   "comments" VARCHAR(1000),
   "user_id" int NOT NULL,
   "budget_id" int NOT NULL

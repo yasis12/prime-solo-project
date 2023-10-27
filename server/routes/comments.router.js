@@ -43,14 +43,39 @@ router.post('/', (req, res) => {
 });
 
 // DELETE route
-router.delete('/:id', (req,res) => {
-    
+router.delete('/:id', (req, res) => {
+  const commentId = req.params.id;
+
+  pool.query(
+    'DELETE FROM "BudgetComments" WHERE id = $1',
+    [commentId]
+  )
+    .then((result) => {
+      res.status(204).json({ message: 'Comment deleted successfully' });
+    })
+    .catch((error) => {
+      console.error('Error deleting Comment', error);
+      res.status(500)
+    });
 });
 
 // Update Route
-
-// router.update('/:id', (res, req) => {
-
-// });
+router.put('/:id', (req, res) => {
+  const commentId = req.params.id;
+  const { comment } = req.body;
+  console.log('Comment ID', commentId);
+  console.log('Comment edit', comment);
+  pool.query(
+    'UPDATE "BudgetComments" SET "comments" = $1 WHERE "id" = $2',
+    [comment, commentId]
+  )
+    .then((result) => {
+      res.json({ message: 'Comment updated successfully' });
+    })
+    .catch((error) => {
+      console.error('Error updating Comment', error);
+      res.status(500).json({ error: 'An error occurred while updating the comment' });
+    });
+});
 
 module.exports = router;
