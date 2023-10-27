@@ -5,12 +5,12 @@ import { useSelector} from 'react-redux';
 
 function BudgetComments() {
 
+    // const budgetID = useSelector(store => store.budgetID)
+    // const budgetID = 14;
     const [budgets, setBudgets] = useState([]);
     const [commentToPost, setCommentToPost] = useState('');
     const [comments, setComments] = useState([]);
     const [editingComment, setEditingComment] = useState({ id: null, content: "" });
-
-    const [budgetComments, setBudgetComments] = useState({});
 
     const fetchBudgets = () => {
         axios.get('/api/budgetID/all').then((response) => {
@@ -44,6 +44,8 @@ function BudgetComments() {
         });
     };
     
+    
+
     // Delete Comment Function
     const handleDeleteComment = (commentId) => {
       console.log('handle delete ID:', commentId);
@@ -56,23 +58,21 @@ function BudgetComments() {
         });
     };
     // Add comment Function
-    const handleSubmit = (budgetId) => {
+    const handleSubmit = () => {
       const requestData = {
-        comment: budgetComments[budgetId] || "", // Get the comment for the specific budget
-        budgetID: budgetId,
+        comment: commentToPost,
+        budgetID: parseInt(budgetID)
       };
       console.log('Post Request Data', requestData);
       axios.post('/api/comments', requestData)
         .then((response) => {
           console.log(`Comment data submitted successfully`);
           fetchComments();
-          // Clear the comment for the specific budget
-          setBudgetComments({ ...budgetComments, [budgetId]: "" });
-        })
-        .catch(error => {
+          setCommentToPost('');
+        }).catch(error => {
           console.log('Error submitting Comment data', error);
         });
-    }
+    };
     
     
     //Use Effect
@@ -86,40 +86,38 @@ function BudgetComments() {
       <h1>Comment any budget insights you have here!</h1>
       {budgets.map((budget) => (
         <div key={budget.id}>
-          <h2>{budget.budgetTitle} {budget.id}</h2>
+          <h2>{budget.budgetTitle}</h2>
           <ul>
           {comments
-          .filter((comment) => comment.budget_id === budget.id) 
-          .map((comment) => (
-            <li key={comment.id}>
-              {editingComment.id === comment.id ? (
-                <input
-                  type="text"
-                  value={editingComment.content}
-                  onChange={(e) => setEditingComment({ id: comment.id, content: e.target.value })}
-                />
-              ) : (
-                comment.comments 
-              )}
-              {editingComment.id === comment.id ? (
-                <button onClick={() => handleUpdateComment(comment.id)}>Save</button>
-              ) : (
-                <button onClick={() => setEditingComment({ id: comment.id, content: comment.comments })}>Edit</button>
-              )}
-              <button onClick={() => handleDeleteComment(comment.id)}>Delete</button>
-            </li>
-          ))}
+            .filter((comment) => comment.budgetID === budget.id)
+            .map((comment) => (
+              <li key={comment.id}>
+                {editingComment.id === comment.id ? (
+                  <input
+                    type="text"
+                    value={editingComment.content}
+                    onChange={(e) =>
+                      setEditingComment({
+                        id: comment.id,
+                        content: e.target.value,
+                      })
+                    }
+                  />
+                ) : (
+                  comment.comments
+                )}
+                {editingComment.id === comment.id ? (
+                  <button onClick={() => handleUpdateComment(comment.id)}>Save</button>
+                ) : (
+                  <button onClick={() => setEditingComment({ id: comment.id, content: comment.comments })}>Edit</button>
+                )}
+                <button onClick={() => handleDeleteComment(comment.id)}>Delete</button>
+              </li>
+            ))}
 
           </ul>
-          <form onSubmit={(event) => {
-            event.preventDefault(); 
-            handleSubmit(budget.id);
-          }}>
-            <input
-              type="text"
-              value={budgetComments[budget.id] || ""}
-              onChange={(event) => setBudgetComments({ ...budgetComments, [budget.id]: event.target.value })}
-            />
+          <form onSubmit={() => handleSubmit(budget.id)}>
+            <input type="text" value={commentToPost} onChange={(event) => setCommentToPost(event.target.value)} />
             <button type="submit">Add Comment</button>
           </form>
         </div>
@@ -128,4 +126,3 @@ function BudgetComments() {
     )
 }
 
-export default BudgetComments;

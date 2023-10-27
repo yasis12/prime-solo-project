@@ -45,7 +45,7 @@ router.get('/all', (req, res) => {
   const userID = req.user.id;
 
   pool.query(
-    'SELECT "budgetTitle" FROM "Budget" WHERE user_id = $1',
+    'SELECT "id", "budgetTitle" FROM "Budget" WHERE user_id = $1',
     [userID]
   )
   .then((result) => {
