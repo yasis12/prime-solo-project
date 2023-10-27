@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './AuditPage.css'
 import axios from 'axios';
 import CategorizedSpending from '../CategorizedSpending/CategorizedSpending';
 
-function AuditPage() {
 
+function AuditPage() {
+    const history = useHistory();
     // Store
     const budgetTitle = useSelector(store => store.budgetTitle);
-    //! const budgetID = useSelector(store => store.budgetID)
-    const budgetID = 14;
+    // const budgetID = useSelector(store => store.budgetID)
+    const budgetID = 16;
     // States for calculations
     const [budgets, setBudgets] = useState([]);
     const [income, setIncome] = useState([]);
@@ -145,28 +147,31 @@ function AuditPage() {
 
       // Total Monthly Spending
       const totalMonthlySpending = Number(monthlyNeeds) + Number(monthlyWants) + Number(savingsDebts);
-      //! const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
-      const moneyLeftOver = -10;
+      const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
+      // const moneyLeftOver = -10;
 
       // How long to pay of debts (not including interest) if every month was like the one audited
       const howLongToPayOffDebts = () => {
         if (moneyLeftOver < 0) {
           return 'NEVER IN A MILLION';
         } else {
-          return debtsTotal / moneyLeftOver;
+          return (debtsTotal / moneyLeftOver).toFixed(2); // Two decimal places
         }
       }
       
       const timeToPayDebtsDisplay = howLongToPayOffDebts();
       // Percent of monthly income 
-      const needsPercent = monthlyNeeds / monthlyIncome;
-      const wantsPercent = monthlyWants / monthlyIncome;
-      const savingsDebtsPercent = savingsDebts / monthlyIncome;
+      const needsPercent = (monthlyNeeds / monthlyIncome * 100).toFixed(); // Two decimal places
+      const wantsPercent = (monthlyWants / monthlyIncome * 100).toFixed(); // Two decimal places
+      const savingsDebtsPercent = (savingsDebts / monthlyIncome * 100).toFixed(); // Two decimal places
 
       //todo: Complete categorized spending component
 
       //todo: Format the percantages so they are not so long
 
+      const additionalResources = () => {
+        history.push('/resources');
+      }
     return (
         <>
         <h1>Audit: {budgetTitle}</h1>
@@ -185,17 +190,17 @@ function AuditPage() {
             </div>
             <div id='needs'>
                 <h4>50 Needs</h4>  
-                <h3>Your Percent %{needsPercent}</h3>
+                <h3>Your Percent {needsPercent}%</h3>
                 <h4>${monthlyNeeds}</h4> 
             </div>
             <div id='wants'>
                 <h4>30 Wants</h4>  
-                <h3>Your Percent %{wantsPercent}</h3>
+                <h3>Your Percent {wantsPercent}%</h3>
                 <h4>${monthlyWants}</h4> 
             </div>
             <div id='savingsDebts'>
                 <h4>20 Savings & Debt Payments</h4> 
-                <h3>Your Percent %{savingsDebtsPercent}</h3> 
+                <h3>Your Percent {savingsDebtsPercent}%</h3> 
                 <h4>${savingsDebts}</h4> 
             </div>
         </div>
@@ -219,6 +224,7 @@ function AuditPage() {
             </div>
         </div>
         
+        <button onClick={additionalResources}>Additonal Resources</button>
         </>
     )
 }
