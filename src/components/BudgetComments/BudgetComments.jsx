@@ -12,9 +12,6 @@ function BudgetComments() {
     const [comments, setComments] = useState([]);
     const [editingComment, setEditingComment] = useState({ id: null, content: "" });
 
-
-    console.log('setComments', comments);
-
     const fetchBudgets = () => {
         axios.get('/api/budgetID/all').then((response) => {
           console.log('Fetched Budgets', response.data);
@@ -51,9 +48,10 @@ function BudgetComments() {
 
     // Delete Comment Function
     const handleDeleteComment = (commentId) => {
+      console.log('handle delete ID:', commentId);
       axios.delete(`/api/comments/${commentId}`)
         .then((response) => {
-          // Handle the deletion in your UI
+        fetchComments(); // Refetch comments after the update
         })
         .catch((error) => {
           console.log('Error deleting comment', error);
@@ -70,6 +68,7 @@ function BudgetComments() {
         .then((response) => {
           console.log(`Comment data submitted successfully`);
           fetchComments();
+          setCommentToPost('');
         }).catch(error => {
           console.log('Error submitting Comment data', error);
         });
