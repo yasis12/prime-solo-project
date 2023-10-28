@@ -1,9 +1,70 @@
 .user-page{
-    background-color: rgba(255, 255, 255, 0.5);
-    background-image: url('https://t4.ftcdn.net/jpg/02/15/53/17/240_F_215531776_MXesXNIqCZlrv336KOmyBTeTViMrVoSi.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    min-height: 100vh; 
-    /* Other styling for the userPage-container */
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-image: url('https://t3.ftcdn.net/jpg/04/84/36/98/240_F_484369865_uGrJURH8FtldtXF9C9SfGqgx2xj0oWWA.jpg');
+  background-size: 400px;
+  background-repeat: repeat;
+  background-position: center center;
+  min-height: 100vh; 
+
   }
+
+  #user-card {
+    background-color: rgb(232, 232, 232);
+    padding: 20px; /* Add padding for spacing inside the card */
+    margin: 20px; /* Add margin to create space around the card */
+    border-radius: 10px; /* Rounded corners for the card */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.356); /* Box shadow for a subtle depth effect */
+    text-align: left; /* Align text to the left within the card */
+    max-width: 600px; /* Set a maximum width for the card, adjust as needed */
+    width: 100%;
+    max-height: 400px; /* Set a maximum height for the card, adjust as needed */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+  }
+
+  h2 {
+    font-size: 48px;
+    text-align: center;
+  }
+
+  .green-username {
+    color: green;
+  }
+
+  .better-future {
+    font-size: 24px;
+  }
+
+  .button-container {
+    margin-top: 1px;
+    text-align: center;
+  }
+  
+  .button-container button {
+    background-color: rgb(2, 169, 2);
+    color: white;
+    padding: 10px 20px; /* Adjust padding to make buttons larger */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px; /* Add space between buttons */
+    font-size: 18px; /* Adjust the font size as needed */
+    transition: background-color 0.3s; /* Add a smooth hover effect */
+  
+  }
+  
+  .button-container button:hover {
+    background-color: darkgreen; /* Change background color on hover */
+  }
+
+  #user-card h2, #user-card p {
+    margin: 5px;
+    padding: 0;
+  }
+  

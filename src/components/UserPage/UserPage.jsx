@@ -18,17 +18,21 @@ function UserPage() {
 
   return (
     <div className="container user-page">
-      <h2>Welcome to Budget Buddy {user.username}!</h2>
-      <p>You are user number: {user.id}</p>
-      <p>Are you ready to better your financial future?</p>
-      <button onClick={handleYes}>Yes</button>
-      <button onClick={handleNotYet}>Not Yet</button>
-      <br /> 
-
-      <LogOutButton className="btn" />
+      <div id='user-card'>
+      <h2>Welcome to Budget Buddy <span className="green-username">{user.username}</span>!</h2>
+        <p>You are user number: {user.id}</p>
+        <div className='better-future'>
+          <h4>Are you ready to better your financial future?</h4>
+        </div>
+        <div className='button-container'>
+          <button onClick={handleYes}>Yes</button>
+          <button onClick={handleNotYet}>Not Yet</button>
+        </div>
+        
+      </div>
+      
     </div>
   );
 }
 
-// this allows us to use <App /> in index.js
 export default UserPage;
