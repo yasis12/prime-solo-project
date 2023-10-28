@@ -1,0 +1,33 @@
+/* todo: Style this page */
+.resources-page{
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    background-image: url('https://t3.ftcdn.net/jpg/04/84/36/98/240_F_484369865_uGrJURH8FtldtXF9C9SfGqgx2xj0oWWA.jpg');
+    background-size: 400px;
+    background-repeat: repeat;
+    background-position: center center;
+    min-height: 100vh; 
+}
+
+#resources-card {
+    background-color: rgb(232, 232, 232);
+    padding: 20px; /* Add padding for spacing inside the card */
+    margin: 20px; /* Add margin to create space around the card */
+    border-radius: 10px; /* Rounded corners for the card */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.356); /* Box shadow for a subtle depth effect */
+    text-align: left; /* Align text to the left within the card */
+    max-width: 800px; /* Set a maximum width for the card, adjust as needed */
+    width: 100%;
+    max-height: 1200px; /* Set a maximum height for the card, adjust as needed */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+  }
+
+#resources-card p {
+    margin: 0px;
+    padding: 0;
+  }

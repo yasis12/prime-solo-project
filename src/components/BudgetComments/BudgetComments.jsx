@@ -6,7 +6,6 @@ import { useSelector} from 'react-redux';
 function BudgetComments() {
 
     const [budgets, setBudgets] = useState([]);
-    const [commentToPost, setCommentToPost] = useState('');
     const [comments, setComments] = useState([]);
     const [editingComment, setEditingComment] = useState({ id: null, content: "" });
 
@@ -83,47 +82,56 @@ function BudgetComments() {
 
     return (
       <>
-      <h1>Comment any budget insights you have here!</h1>
-      {budgets.map((budget) => (
-        <div key={budget.id}>
-          <h2>{budget.budgetTitle} {budget.id}</h2>
-          <ul>
-          {comments
-          .filter((comment) => comment.budget_id === budget.id) 
-          .map((comment) => (
-            <li key={comment.id}>
-              {editingComment.id === comment.id ? (
-                <input
-                  type="text"
-                  value={editingComment.content}
-                  onChange={(e) => setEditingComment({ id: comment.id, content: e.target.value })}
-                />
-              ) : (
-                comment.comments 
-              )}
-              {editingComment.id === comment.id ? (
-                <button onClick={() => handleUpdateComment(comment.id)}>Save</button>
-              ) : (
-                <button onClick={() => setEditingComment({ id: comment.id, content: comment.comments })}>Edit</button>
-              )}
-              <button onClick={() => handleDeleteComment(comment.id)}>Delete</button>
-            </li>
-          ))}
 
-          </ul>
-          <form onSubmit={(event) => {
-            event.preventDefault(); 
-            handleSubmit(budget.id);
-          }}>
-            <input
-              type="text"
-              value={budgetComments[budget.id] || ""}
-              onChange={(event) => setBudgetComments({ ...budgetComments, [budget.id]: event.target.value })}
-            />
-            <button type="submit">Add Comment</button>
-          </form>
+      <div className='comment-page'>
+        <div id='comment-card'>
+            <h1>Comment any budget insights you have here!</h1>
+
+            <div id='budget-comments'>
+              {budgets.map((budget) => (
+              <div key={budget.id}>
+                <h3>{budget.budgetTitle} {budget.id}</h3>
+                  <ul>
+                  {comments
+                  .filter((comment) => comment.budget_id === budget.id) 
+                  .map((comment) => (
+                    <li key={comment.id}>
+                      {editingComment.id === comment.id ? (
+                        <input
+                          type="text"
+                          value={editingComment.content}
+                          onChange={(e) => setEditingComment({ id: comment.id, content: e.target.value })}
+                        />
+                      ) : (
+                        comment.comments 
+                      )}
+                      {editingComment.id === comment.id ? (
+                        <button onClick={() => handleUpdateComment(comment.id)}>Save</button>
+                      ) : (
+                        <button onClick={() => setEditingComment({ id: comment.id, content: comment.comments })}>Edit</button>
+                      )}
+                      <button onClick={() => handleDeleteComment(comment.id)}>Delete</button>
+                    </li>
+                  ))}
+                  </ul>
+                <form onSubmit={(event) => {
+                  event.preventDefault(); 
+                  handleSubmit(budget.id);
+                }}>
+                  <input
+                    type="text"
+                    value={budgetComments[budget.id] || ""}
+                    onChange={(event) => setBudgetComments({ ...budgetComments, [budget.id]: event.target.value })}
+                  />
+                  <button type="submit">Add Comment</button>
+                </form>
+              </div>
+            ))}
+            </div>
+
         </div>
-      ))}
+      </div>
+      
     </>
     )
 }

@@ -175,57 +175,63 @@ function AuditPage() {
       }
     return (
         <>
-        <h1>Audit: {budgetTitle}</h1>
-        <div className='monthlyIncome'>
-            <h3>Monthly Income: ${monthlyIncome}</h3> 
-        </div>
-        <div className='monthlySpending'>
-            <h3>Monthly Spending: ${totalMonthlySpending}</h3> 
-        </div>
-  
-        {/* 50/30/20 section intended to show the user what category they need to focus on when over spending */}
+        <div className='audit-page'>
+          <div id='audit-card'>
+              <h1>Audit: {budgetTitle}</h1>
+            <div className='monthlyIncome'>
+                <h3>Monthly Income: ${monthlyIncome}</h3> 
+            </div>
+            <div className='monthlySpending'>
+                <h3>Monthly Spending: ${totalMonthlySpending}</h3> 
+            </div>
       
-        <div className='fiftyThirtyTwenty'>
-            <div id='budgetTitle'>
-                <h3>How does your spending compare to the recommened 50/30/20 Budget</h3>
+            {/* 50/30/20 section intended to show the user what category they need to focus on when over spending */}
+          
+            <div className='fiftyThirtyTwenty'>
+                <div id='budgetTitle'>
+                    <h3>How does your spending compare to the recommened 50/30/20 Budget</h3>
+                </div>
+                <div id='needs'>
+                    <h4>50 Needs</h4>  
+                    <h3>Your Percent {needsPercent}%</h3>
+                    <h4>${monthlyNeeds}</h4> 
+                </div>
+                <div id='wants'>
+                    <h4>30 Wants</h4>  
+                    <h3>Your Percent {wantsPercent}%</h3>
+                    <h4>${monthlyWants}</h4> 
+                </div>
+                <div id='savingsDebts'>
+                    <h4>20 Savings & Debt Payments</h4> 
+                    <h3>Your Percent {savingsDebtsPercent}%</h3> 
+                    <h4>${savingsDebts}</h4> 
+                </div>
             </div>
-            <div id='needs'>
-                <h4>50 Needs</h4>  
-                <h3>Your Percent {needsPercent}%</h3>
-                <h4>${monthlyNeeds}</h4> 
+            
+            {/* <CategorizedSpending />  This is a stretch goal now */}
+            
+            {/* This section will demonstrate (with out interest) how long it will take to pay off current debts. If there are no current debts it well say congragts */}
+            <div className='debtCalculator'>
+                <div id='moneyLeftEOM'>
+                    <h4>Money leftover at the end of the Month</h4>
+                    <h3>${moneyLeftOver}</h3> {/* placeholder until store is used */}
+                </div>
+                <div id='totalDebts'>
+                    <h4>Total Debts</h4>
+                    <h3>${debtsTotal}</h3> {/* placeholder until store is used */}
+                </div>
+                <div id='timeToPayDebts'>
+                    <h4>Given your spending and money left over at the end of the month ( not factoring in interest ) it would take you approximately</h4>
+                    <h3> {timeToPayDebtsDisplay} YEARS to pay off debts</h3> {/* placeholder until store is used */}
+                    <h3>To pay of your Debts</h3>
+                </div>
             </div>
-            <div id='wants'>
-                <h4>30 Wants</h4>  
-                <h3>Your Percent {wantsPercent}%</h3>
-                <h4>${monthlyWants}</h4> 
-            </div>
-            <div id='savingsDebts'>
-                <h4>20 Savings & Debt Payments</h4> 
-                <h3>Your Percent {savingsDebtsPercent}%</h3> 
-                <h4>${savingsDebts}</h4> 
-            </div>
+            
+            <button onClick={additionalResources}>Additonal Resources</button>
+          </div>
         </div>
+
         
-        {/* <CategorizedSpending />  This is a stretch goal now */}
-        
-        {/* This section will demonstrate (with out interest) how long it will take to pay off current debts. If there are no current debts it well say congragts */}
-        <div className='debtCalculator'>
-            <div id='moneyLeftEOM'>
-                <h4>Money leftover at the end of the Month</h4>
-                <h3>${moneyLeftOver}</h3> {/* placeholder until store is used */}
-            </div>
-            <div id='totalDebts'>
-                <h4>Total Debts</h4>
-                <h3>${debtsTotal}</h3> {/* placeholder until store is used */}
-            </div>
-            <div id='timeToPayDebts'>
-                <h4>Given your spending and money left over at the end of the month ( not factoring in interest ) it would take you approximately</h4>
-                <h3> {timeToPayDebtsDisplay} YEARS to pay off debts</h3> {/* placeholder until store is used */}
-                <h3>To pay of your Debts</h3>
-            </div>
-        </div>
-        
-        <button onClick={additionalResources}>Additonal Resources</button>
         </>
     )
 }

@@ -82,36 +82,42 @@ function IncomePage() {
     //todo: Add Tool tips to each input
     return (
         <>
-        <h1>Income Page</h1>
-        {/* Creating the Budget ID here. */}
-        <form onSubmit={handleBudgetIDSubmit}>
-            <h3>Name your Audit:</h3>
-            <p>I recommened this be the Month and Year of the inputs you are using</p>
-            <input type="text" placeholder='January 2050' value={budgetTitle} onChange={(event) => setBudgetTitle(event.target.value)} />
-            <button type='submit'>Save BudgetID</button>
-        </form>
-        <br /><br /><br />
-        {/* this is the Income Form: user will enter all income */}
-        <h3>INCOME: {budgetTitle}</h3>
-         <form onSubmit={handleSubmit}>
-            <div className='wagesAfterTax form-field'>
-                <label>Wages After Tax: </label>
-                <input type="number" placeholder='$' value={wagesAfterTax.price} onChange={(event) => handleWagesAfterTaxChange(event, 'price')} required/>
-                <input type="text" placeholder='Description' value={wagesAfterTax.description} onChange={(event) => handleWagesAfterTaxChange(event, 'description')} />
-            </div>
-            <div className='otherIncome form-field'>
-            <label>Other Income: </label>
-                {otherIncomeForm.map((value, i) => (
-                    <div key={i}>
-                        <input type="number" name='price' placeholder='$' value={value.price} onChange={(event) => handleOtherIncomeChange(event, i)}/>
-                        <input type="text" placeholder='Description' name="description" value={value.description} onChange={(event) => handleOtherIncomeChange(event, i)}/>
-                        <button onClick={addInputField}> + </button>
+        <div className='income-page'>
+            <div id='income-card'>
+                <h1>Income Page</h1>
+                {/* Creating the Budget ID here. */}
+                <form onSubmit={handleBudgetIDSubmit}>
+                    <h3>Name your Audit:</h3>
+                    <p>I recommened this be the Month and Year of the inputs you are using</p>
+                    <input type="text" placeholder='January 2050' value={budgetTitle} onChange={(event) => setBudgetTitle(event.target.value)} />
+                    <button type='submit'>Save BudgetID</button>
+                </form>
+                <br /><br /><br />
+                {/* this is the Income Form: user will enter all income */}
+                <h3>INCOME: {budgetTitle}</h3>
+                <form onSubmit={handleSubmit}>
+                    <div className='wagesAfterTax form-field'>
+                        <label>Wages After Tax: </label>
+                        <input type="number" placeholder='$' value={wagesAfterTax.price} onChange={(event) => handleWagesAfterTaxChange(event, 'price')} required/>
+                        <input type="text" placeholder='Description' value={wagesAfterTax.description} onChange={(event) => handleWagesAfterTaxChange(event, 'description')} />
                     </div>
-                ))}
+                    <div className='otherIncome form-field'>
+                    <label>Other Income: </label>
+                        {otherIncomeForm.map((value, i) => (
+                            <div key={i}>
+                                <input type="number" name='price' placeholder='$' value={value.price} onChange={(event) => handleOtherIncomeChange(event, i)}/>
+                                <input type="text" placeholder='Description' name="description" value={value.description} onChange={(event) => handleOtherIncomeChange(event, i)}/>
+                                <button onClick={addInputField}> + </button>
+                            </div>
+                        ))}
+                    </div>
+                    <button type='submit'>Submit Income</button>
+                </form>
+                <button onClick={nextPage}>Next Page</button>
             </div>
-            <button type='submit'>Submit Income</button>
-        </form>
-        <button onClick={nextPage}>Next Page</button>
+            
+        </div>
+        
         </>
     )
 }

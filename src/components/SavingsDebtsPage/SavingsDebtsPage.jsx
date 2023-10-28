@@ -65,48 +65,55 @@ function SavingsDebtsPage() {
 
     return (
         <>
-        <h1>Savings & Debts: {budgetTitle}</h1>
-        <form onSubmit={handleSubmit}>
-        {/* START FORM */}
-            {/* Dining Out */}
-        {['emergancyFundContributions','savingsAccountsContributions','workRetirementContributions','individualRetirement','excessLoanPayments','creditCardPayment','studentLoan','other','debts'].map((category) => (
-            <div className={category} key={category}>
-                <label>
-                    {category === 'emergancyFundContributions' ? 'Emergancy Fund Contributions' : 
-                        category === 'savingsAccountsContributions' ? 'Savings Account Contributions' : 
-                        category === 'workRetirementContributions' ? '401k Contributions' :
-                        category === 'individualRetirement' ? 'Individual Retirement Account Contributions' :
-                        category === 'excessLoanPayments' ? 'Excess Loan Payments' :
-                        category === 'creditCardPayment' ? 'Credit Card Minimum Monthly Payments' :
-                        category === 'studentLoan' ? 'Student Loan Minimum Monthly Payments' :
-                        category === 'other' ? 'Other Savings' :
-                        'Debts'}:
-                </label>
-                {forms[category].map((value, i) => (
-                    <div key={i}>
-                        <input 
-                        type = "number"
-                        placeholder='$'
-                        name = "price"
-                        value ={value.price}
-                        onChange={(event) => handleInputChange(event, category, i)}
-                        />
-                        <input 
-                        type = "text"
-                        name = "description"
-                        placeholder='Description'
-                        value ={value.description}
-                        onChange={(event) => handleInputChange(event, category, i)}
-                        />
-                        <button onClick={() => addInputField(category)}>+</button>
+
+        <div className='savingsDebts-page'>
+            <div id='savingsDebts-card'>
+                    <h1>Savings & Debts: {budgetTitle}</h1>
+                <form onSubmit={handleSubmit}>
+                {/* START FORM */}
+                    {/* Dining Out */}
+                {['emergancyFundContributions','savingsAccountsContributions','workRetirementContributions','individualRetirement','excessLoanPayments','creditCardPayment','studentLoan','other','debts'].map((category) => (
+                    <div className={category} key={category}>
+                        <label>
+                            {category === 'emergancyFundContributions' ? 'Emergancy Fund Contributions' : 
+                                category === 'savingsAccountsContributions' ? 'Savings Account Contributions' : 
+                                category === 'workRetirementContributions' ? '401k Contributions' :
+                                category === 'individualRetirement' ? 'Individual Retirement Account Contributions' :
+                                category === 'excessLoanPayments' ? 'Excess Loan Payments' :
+                                category === 'creditCardPayment' ? 'Credit Card Minimum Monthly Payments' :
+                                category === 'studentLoan' ? 'Student Loan Minimum Monthly Payments' :
+                                category === 'other' ? 'Other Savings' :
+                                'Debts'}:
+                        </label>
+                        {forms[category].map((value, i) => (
+                            <div key={i}>
+                                <input 
+                                type = "number"
+                                placeholder='$'
+                                name = "price"
+                                value ={value.price}
+                                onChange={(event) => handleInputChange(event, category, i)}
+                                />
+                                <input 
+                                type = "text"
+                                name = "description"
+                                placeholder='Description'
+                                value ={value.description}
+                                onChange={(event) => handleInputChange(event, category, i)}
+                                />
+                                <button onClick={() => addInputField(category)}>+</button>
+                            </div>
+                        ))}
                     </div>
                 ))}
+                <button type='submit'>Submit Savings & Debts</button>
+                {/* END FORM */}
+                </form>
+                <button onClick={nextPage}>Next Page</button>
             </div>
-        ))}
-        <button type='submit'>Submit Savings & Debts</button>
-        {/* END FORM */}
-        </form>
-        <button onClick={nextPage}>Next Page</button>
+        </div>
+
+     
         </>
     )
 }

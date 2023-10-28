@@ -70,57 +70,62 @@ function NeedsPage() {
 
     return (
         <>
-        <h1>Needs: {budgetTitle}</h1>
-        <form onSubmit={handleSubmit}>
-        {/* START FORM */}
-            {/* Dining Out */}
-        {['rentMortgage','rentalHomeInsurance','autoInsurance','propertyTax','healthInsurance','otherInsurance',
-        'waterBill','sanitationGarbage','carMaintenance', 'carPayment', 'otherTransport', 'phoneBill', 'internetBill', 
-        'groceries', 'gas', 'other'].map((category) => (
-            <div className={category} key={category}>
-                <label>
-                    {category === 'rentMortgage' ? 'Rent / Mortgage' : 
-                        category === 'rentalHomeInsurance' ? 'Rental Home Insurance' : 
-                        category === 'autoInsurance' ? 'Auto Insurance' :
-                        category === 'propertyTax' ? 'Property Tax' :
-                        category === 'healthInsurance' ? 'Health Insurance' :
-                        category === 'otherInsurance' ? 'Other Insurance' :
-                        category === 'waterBill' ? 'Water Bill' :
-                        category === 'sanitationGarbage' ? 'Sanitation Garbage' :
-                        category === 'carMaintenance' ? 'Car Maintenance' :
-                        category === 'carPayment' ? 'Car Payment' :
-                        category === 'otherTransport' ? 'Other Transport' :
-                        category === 'phoneBill' ? 'Phone Bill' :
-                        category === 'internetBill' ? 'Internet Bill' :
-                        category === 'groceries' ? 'Groceries' :
-                        category === 'gas' ? 'Gas' :
-                        'Other Needs'}:
-                </label>
-                {forms[category].map((value, i) => (
-                    <div key={i}>
-                        <input 
-                        type = "number"
-                        placeholder='$'
-                        name = "price"
-                        value ={value.price}
-                        onChange={(event) => handleInputChange(event, category, i)}
-                        />
-                        <input 
-                        type = "text"
-                        name = "description"
-                        placeholder='Description'
-                        value ={value.description}
-                        onChange={(event) => handleInputChange(event, category, i)}
-                        />
-                        <button onClick={() => addInputField(category)}>+</button>
+        <div className='needs-page'>
+            <div id='needs-card'>
+                <h1>Needs: {budgetTitle}</h1>
+                <form onSubmit={handleSubmit}>
+                {/* START FORM */}
+                    {/* Dining Out */}
+                {['rentMortgage','rentalHomeInsurance','autoInsurance','propertyTax','healthInsurance','otherInsurance',
+                'waterBill','sanitationGarbage','carMaintenance', 'carPayment', 'otherTransport', 'phoneBill', 'internetBill', 
+                'groceries', 'gas', 'other'].map((category) => (
+                    <div className={category} key={category}>
+                        <label>
+                            {category === 'rentMortgage' ? 'Rent / Mortgage' : 
+                                category === 'rentalHomeInsurance' ? 'Rental Home Insurance' : 
+                                category === 'autoInsurance' ? 'Auto Insurance' :
+                                category === 'propertyTax' ? 'Property Tax' :
+                                category === 'healthInsurance' ? 'Health Insurance' :
+                                category === 'otherInsurance' ? 'Other Insurance' :
+                                category === 'waterBill' ? 'Water Bill' :
+                                category === 'sanitationGarbage' ? 'Sanitation Garbage' :
+                                category === 'carMaintenance' ? 'Car Maintenance' :
+                                category === 'carPayment' ? 'Car Payment' :
+                                category === 'otherTransport' ? 'Other Transport' :
+                                category === 'phoneBill' ? 'Phone Bill' :
+                                category === 'internetBill' ? 'Internet Bill' :
+                                category === 'groceries' ? 'Groceries' :
+                                category === 'gas' ? 'Gas' :
+                                'Other Needs'}:
+                        </label>
+                        {forms[category].map((value, i) => (
+                            <div key={i}>
+                                <input 
+                                type = "number"
+                                placeholder='$'
+                                name = "price"
+                                value ={value.price}
+                                onChange={(event) => handleInputChange(event, category, i)}
+                                />
+                                <input 
+                                type = "text"
+                                name = "description"
+                                placeholder='Description'
+                                value ={value.description}
+                                onChange={(event) => handleInputChange(event, category, i)}
+                                />
+                                <button onClick={() => addInputField(category)}>+</button>
+                            </div>
+                        ))}
                     </div>
                 ))}
+                <button type='submit'>Save Needs</button>
+                {/* END FORM */}
+                </form>
+                <button onClick={nextPage}>Next Page</button>
             </div>
-        ))}
-        <button type='submit'>Save Needs</button>
-        {/* END FORM */}
-        </form>
-        <button onClick={nextPage}>Next Page</button>
+        </div>
+       
         </>
        
     )

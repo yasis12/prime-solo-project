@@ -64,48 +64,56 @@ function WantsPage() {
 
     return (
         <>
-        <h1>Wants: {budgetTitle}</h1>
-        <form onSubmit={handleSubmit}>
-        {/* START FORM */}
-            {/* Dining Out */}
-        {['diningOut','clothingJewlery','drugs','moviesEvents','memberships','travel','subscriptions','homeDecor','other'].map((category) => (
-            <div className={category} key={category}>
-                <label>
-                    {category === 'diningOut' ? 'Dining Out' : 
-                        category === 'clothingJewlery' ? 'Clothing & Jewlery' : 
-                        category === 'drugs' ? 'Drugs (Alcohol, THC)' :
-                        category === 'moviesEvents' ? 'Movies & Events' :
-                        category === 'memberships' ? 'Memberships' :
-                        category === 'travel' ? 'Travel' :
-                        category === 'subscriptions' ? 'Subscriptions' :
-                        category === 'homeDecor' ? 'Home Decor Items' :
-                        'Other Wants'}:
-                </label>
-                {forms[category].map((value, i) => (
-                    <div key={i}>
-                        <input 
-                        type = "number"
-                        name = "price"
-                        placeholder="$"
-                        value ={value.price}
-                        onChange={(event) => handleInputChange(event, category, i)}
-                        />
-                        <input 
-                        type = "text"
-                        name = "description"
-                        placeholder='Description'
-                        value ={value.description}
-                        onChange={(event) => handleInputChange(event, category, i)}
-                        />
-                        <button onClick={() => addInputField(category)}>+</button>
+        <div className='wants-page'>
+            <div id='wants-card'>
+                    <h1>Wants: {budgetTitle}</h1>
+                <form onSubmit={handleSubmit}>
+                {/* START FORM */}
+                    {/* Dining Out */}
+                {['diningOut','clothingJewlery','drugs','moviesEvents','memberships','travel','subscriptions','homeDecor','other'].map((category) => (
+                    <div className={category} key={category}>
+                        <label>
+                            {category === 'diningOut' ? 'Dining Out' : 
+                                category === 'clothingJewlery' ? 'Clothing & Jewlery' : 
+                                category === 'drugs' ? 'Drugs (Alcohol, THC)' :
+                                category === 'moviesEvents' ? 'Movies & Events' :
+                                category === 'memberships' ? 'Memberships' :
+                                category === 'travel' ? 'Travel' :
+                                category === 'subscriptions' ? 'Subscriptions' :
+                                category === 'homeDecor' ? 'Home Decor Items' :
+                                'Other Wants'}:
+                        </label>
+                        {forms[category].map((value, i) => (
+                            <div key={i}>
+                                <input 
+                                type = "number"
+                                name = "price"
+                                placeholder="$"
+                                value ={value.price}
+                                onChange={(event) => handleInputChange(event, category, i)}
+                                />
+                                <input 
+                                type = "text"
+                                name = "description"
+                                placeholder='Description'
+                                value ={value.description}
+                                onChange={(event) => handleInputChange(event, category, i)}
+                                />
+                                <button onClick={() => addInputField(category)}>+</button>
+                            </div>
+                        ))}
                     </div>
                 ))}
+                <button type='submit'>Save Wants</button>
+                {/* END FORM */}
+                </form>
+                <button onClick={nextPage}>Next Page</button>
             </div>
-        ))}
-        <button type='submit'>Save Wants</button>
-        {/* END FORM */}
-        </form>
-        <button onClick={nextPage}>Next Page</button>
+        </div>
+
+
+
+      
         </>
        
     )
