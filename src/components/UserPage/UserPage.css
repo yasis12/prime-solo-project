@@ -47,7 +47,7 @@
   }
   
   .button-container button {
-    background-color: rgb(2, 169, 2);
+    background-color: #46994c;
     color: white;
     padding: 10px 20px; /* Adjust padding to make buttons larger */
     border: none;
@@ -56,7 +56,6 @@
     margin: 10px; /* Add space between buttons */
     font-size: 18px; /* Adjust the font size as needed */
     transition: background-color 0.3s; /* Add a smooth hover effect */
-  
   }
   
   .button-container button:hover {

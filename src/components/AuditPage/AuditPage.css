@@ -26,3 +26,28 @@
     flex-direction: column;
     align-items: center; /* Center horizontally */
   }
+
+  .budgetCard {
+    background-color: #46994c49;
+    padding: 8px;
+    margin: 12px; /* Adjust margin for spacing between cards */
+    border-radius: 5px;
+    border-color: black;
+    box-shadow: 0 0 6px #b7dcbe;
+    text-align: center;
+    max-width: 400px; /* Adjust the width as needed */
+}
+
+.budgetCard:hover {
+    transform: scale(1.2); /* Scale the card by 5% on hover */
+    background-color: #46994c;
+}
+
+#audit-title {
+    color: black;
+    font-size: 50px;
+}
+
+.pink-budget-title {
+    color: #DB4881;
+  }
