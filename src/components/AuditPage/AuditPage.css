@@ -18,9 +18,9 @@
     border-radius: 10px; /* Rounded corners for the card */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.356); /* Box shadow for a subtle depth effect */
     text-align: center; /* Align text to the left within the card */
-    max-width: 800px; /* Set a maximum width for the card, adjust as needed */
+    max-width: 900px; /* Set a maximum width for the card, adjust as needed */
     width: 100%;
-    max-height: 1000px; /* Set a maximum height for the card, adjust as needed */
+    max-height: 1500px; /* Set a maximum height for the card, adjust as needed */
     overflow-y: auto; /* Add vertical scroll if content overflows */
     display: flex;
     flex-direction: column;
@@ -46,8 +46,30 @@
 #audit-title {
     color: black;
     font-size: 50px;
+    position: sticky; /* Set the position to sticky */
+    top: 0; /* Stick to the top of the parent container */
+    padding: 8px;
+    z-index: 1; /* Ensure the title is above the content */
+    width: 100%;
+    background-color: rgb(232, 232, 232);
 }
 
 .pink-budget-title {
     color: #DB4881;
   }
+
+  .budgetCardContainer {
+    display: flex;
+    justify-content: space-between; /* Adjust as needed for spacing between cards */
+}
+
+.text-red {
+    color: #fb0060;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; 
+}
+
+.text-green {
+    color:  #3acd43;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; 
+}
+

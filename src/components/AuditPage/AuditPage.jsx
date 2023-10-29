@@ -148,15 +148,15 @@ function AuditPage() {
 
       // Total Monthly Spending
       const totalMonthlySpending = Number(monthlyNeeds) + Number(monthlyWants) + Number(savingsDebts);
-      const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
-      // const moneyLeftOver = -10;
+      //! const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
+      const moneyLeftOver = 10;
 
       // How long to pay of debts (not including interest) if every month was like the one audited
       const howLongToPayOffDebts = () => {
         if (moneyLeftOver < 0) {
-          return 'NEVER IN A MILLION';
+          return `∞`;
         } else {
-          return (debtsTotal / moneyLeftOver).toFixed(2); // Two decimal places
+          return (debtsTotal / moneyLeftOver).toFixed(); // Two decimal places
         }
       }
       
@@ -178,34 +178,36 @@ function AuditPage() {
         <div className='audit-page'>
           <div id='audit-card'>
               <h1 id='audit-title' >Audit <span className="pink-budget-title">{budgetTitle}</span></h1>
-            <div className='budgetCard'>
-                <h3>Monthly Income: ${monthlyIncome}</h3> 
-            </div>
-            <div className='budgetCard'>
-                <h3>Monthly Spending: ${totalMonthlySpending}</h3> 
-            </div>
+              <div className='budgetCardContainer'>
+                <div className='budgetCard'>
+                    <h3>Monthly Income: ${monthlyIncome}</h3>
+                </div>
+                <div className='budgetCard'>
+                    <h3>Monthly Spending: ${totalMonthlySpending}</h3>
+                </div>
+              </div>
       
             {/* 50/30/20 section intended to show the user what category they need to focus on when over spending */}
           
             <div className='fiftyThirtyTwenty'>
-                <div className='budgetCard' id='budgetTitle'>
-                    <h3>How does your spending compare to the recommened 50/30/20 Budget</h3>
-                </div>
-                <div className='budgetCard' id='needs'>
-                    <h4>Needs (50%)</h4>  
-                    <h3>Your Percent {needsPercent}%</h3>
-                    <h4>${monthlyNeeds}</h4> 
-                </div>
-                <div className='budgetCard' id='wants'>
-                    <h4>Wants (30%)</h4>  
-                    <h3>Your Percent {wantsPercent}%</h3>
-                    <h4>${monthlyWants}</h4> 
-                </div>
-                <div className='budgetCard' id='savingsDebts'>
-                    <h4>Savings & Debt Payments (20%)</h4> 
-                    <h3>Your Percent {savingsDebtsPercent}%</h3> 
-                    <h4>${savingsDebts}</h4> 
-                </div>
+              <div className='budgetCard' id='budgetTitle'>
+                  <h3>How does your spending compare to the recommended 50/30/20 Budget</h3>
+              </div>
+              <div className='budgetCard' id='needs'>
+                  <h4>Needs (50%)</h4>
+                  <h4 className={`${needsPercent > 50 ? 'text-red' : 'text-green'}`} id='spending-rate'>Your Spending Rate: {needsPercent}%</h4>
+                  <h4>${monthlyNeeds}</h4>
+              </div>
+              <div className='budgetCard' id='wants'>
+                  <h4>Wants (30%)</h4>
+                  <h4 className={`${wantsPercent > 30 ? 'text-red' : 'text-green'}`}>Your Spending Rate: {wantsPercent}%</h4>
+                  <h4>${monthlyWants}</h4>
+              </div>
+              <div className='budgetCard' id='savingsDebts'>
+                  <h4>Savings & Debt Payments (20%)</h4>
+                  <h4 className={`${savingsDebtsPercent > 20 ? 'text-red' : 'text-green'}`}>Your Spending Rate: {savingsDebtsPercent}%</h4>
+                  <h4>${savingsDebts}</h4>
+              </div>
             </div>
             
             {/* <CategorizedSpending />  This is a stretch goal now */}
@@ -214,15 +216,16 @@ function AuditPage() {
             <div className='debtCalculator'>
                 <div className='budgetCard' id='moneyLeftEOM'>
                     <h4>Money leftover at the end of the Month</h4>
-                    <h3>${moneyLeftOver}</h3> 
+                    <h3 className={`${moneyLeftOver < 0 ? 'text-red' : 'text-green'}`}>${moneyLeftOver}</h3> 
                 </div>
                 <div className='budgetCard' id='totalDebts'>
                     <h4>Total Debts</h4>
-                    <h3>${debtsTotal}</h3> 
+                    <h3 className='text-red'>${debtsTotal}</h3> 
                 </div>
                 <div className='budgetCard' id='timeToPayDebts'>
                     <h4>Given your spending and money left over at the end of the month ( not factoring in interest ) it would take you approximately</h4>
-                    <h3> {timeToPayDebtsDisplay} YEARS to pay off debts</h3> 
+                    <h3> <span className="pink-budget-title">{timeToPayDebtsDisplay} YEARS</span></h3> 
+                    <h3>to pay off your debts</h3> 
                 </div>
             </div>
             <div className='button-container'>
