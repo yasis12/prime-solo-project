@@ -7,7 +7,8 @@ function InstructionsPage() {
     const handleClick = () => {
         history.push('/income')
     }
-
+    // todo: reword the instructions
+    // todo: style the button
     return (
         <>
         <div className='instructions-page'>

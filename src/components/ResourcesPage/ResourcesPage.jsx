@@ -5,7 +5,7 @@ import YoutubeEmbed from '../YoutubeEmbed/YoutubeEmbed';
 function ResourcesPage() {
     
 
-
+    // todo:reword the resources page
     return (
         <>
         <div className='resources-page'>
