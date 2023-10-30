@@ -29,6 +29,7 @@ import AuditPage from '../AuditPage/AuditPage';
 import ResourcesPage from '../ResourcesPage/ResourcesPage';
 import ReviewPage from '../ReviewPage/ReviewPage';
 import BudgetComments from '../BudgetComments/BudgetComments';
+import CategorizedSpending from '../CategorizedSpending/CategorizedSpending';
 
 import './App.css';
 
@@ -152,6 +153,10 @@ function App() {
           {/* Resources Page */}
           <ProtectedRoute exact path="/resources">
             <ResourcesPage />
+          </ProtectedRoute> 
+          {/* Added this for easier editing of the component*/}
+          <ProtectedRoute exact path="/categorizedSpending">
+            <CategorizedSpending />
           </ProtectedRoute> 
 
           {/* If none of the other routes matched, we will show a 404. */}

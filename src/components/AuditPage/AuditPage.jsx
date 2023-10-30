@@ -210,7 +210,7 @@ function AuditPage() {
               </div>
             </div>
             
-            {/* <CategorizedSpending />  This is a stretch goal now */}
+            <CategorizedSpending />  
             
             {/* This section will demonstrate (with out interest) how long it will take to pay off current debts. If there are no current debts it well say congragts */}
             <div className='debtCalculator'>

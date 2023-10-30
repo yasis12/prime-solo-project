@@ -46,10 +46,7 @@
 #audit-title {
     color: black;
     font-size: 50px;
-    position: sticky; /* Set the position to sticky */
-    top: 0; /* Stick to the top of the parent container */
     padding: 8px;
-    z-index: 1; /* Ensure the title is above the content */
     width: 100%;
     background-color: rgb(232, 232, 232);
 }
