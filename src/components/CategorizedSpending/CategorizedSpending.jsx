@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import './CategorizedSpending.css'
 
 function CategorizedSpending() {
 
+    //! const budgetID = useSelector(store => store.budgetID);
+    const budgetID = 17;
     const [income, setIncome] = useState([]);
     const [needs, setNeeds] = useState([]);
     const [wants, setWants] = useState([]);
     const [savingDebts, setSavingsDebts] = useState([]);
 
+   
      //income get request
      const fetchIncome = () => {
         axios.get('/api/income').then((response) => {
@@ -57,30 +59,84 @@ function CategorizedSpending() {
         fetchSavingsDebts();
         fetchWants();
       }, []);
-  
+
+      const totalMonthlyIncome = (incomeData, selectedBudget) => {
+        // Filter income items for the selected budget
+        const filteredIncome = incomeData.filter((item) => item.budget_id === selectedBudget);
+        // Calculate the total income for the selected budget
+        const totalIncome = filteredIncome.reduce((total, item) => total + item.price, 0);
+        return totalIncome;
+      };
+
+      const totalIncome = totalMonthlyIncome(income, budgetID)
+
+      // needs totals
+      const needsTotals = needs.filter(item => item.budget_id === budgetID)
+      .reduce((totals, item) => {
+        const { category, price } = item;
+        if (!totals[category]) {
+          totals[category] = 0;
+        }
+        totals[category] += price;
+        return totals;
+      }, {});
+      // Savings & Debts totals
+      const allowedSavingsDebtsCategories = [
+        'emergancyFundContributions',
+        'savingsAccountsContributions',
+        'workRetirementContributions',
+        'individualRetirement',
+        'excessLoanPayments',
+        'creditCardPayment',
+        'studentLoan',
+        'other'
+      ];
+      const savingDebtsTotals = savingDebts
+        .filter((item) => item.budget_id === budgetID && allowedSavingsDebtsCategories.includes(item.category))
+        .reduce((totals, item) => {
+          const { category, price } = item;
+          if (!totals[category]) {
+            totals[category] = 0;
+          }
+          totals[category] += price;
+          return totals;
+        }, {});
+      // Wants Totals    
+      const wantsTotals = wants.filter(item => item.budget_id === budgetID)
+      .reduce((totals, item) => {
+        const { category, price } = item;
+        if (!totals[category]) {
+          totals[category] = 0;
+        }
+        totals[category] += price;
+        return totals;
+      }, {});
+
+      const combinedObject = {...needsTotals, ...wantsTotals, ...savingDebtsTotals}
+
+      const sortedCombinedObject = Object.fromEntries(
+        Object.entries(combinedObject).sort(([, a], [, b]) => b - a)
+      );
+      
+      const calculatePercentOfIncome = (price) => {
+        return ((price / totalIncome) * 100).toFixed(2);
+      };
+
     return (
         <>
-        {/* 
-        This section is inteneded to help the user see what category they are spending the most money on and how it compares to their othe expenses
-        */}
-        <div className='categorizedSpending'>
-            <div id='categorySpendingTitle'>
-                <h3>What category are you over spending in?</h3>
-            </div>
-            <div>
-                {/* I will create a new component that has the functionality that I desire here but for now I will add the below code as a place holder so I can see what it will look like*/}
-                <h5>rent utilities: &nbsp;&nbsp;&nbsp;&nbsp;  $500  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  %20 </h5>
-                <h5>gas: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  $500  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  %20 </h5>
-                <h5>Groceries: &nbsp;&nbsp;&nbsp;&nbsp;  $500  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  %20 </h5>
-                <h5>shopping: &nbsp;&nbsp;&nbsp;&nbsp;  $500  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  %20 </h5>
-                <h5>dining out: &nbsp;&nbsp;&nbsp;&nbsp;  $500  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  %20 </h5>
-                <h5>fun: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  $500  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  %20 </h5>
-                <h5>Household Misc: &nbsp;&nbsp;&nbsp;&nbsp;  $500  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  %20 </h5>
-            </div>
+        <div id="categorized-spending-card">
+          <h3>What category are you overspending in?</h3>
+          <div className="category-card">
+            {Object.entries(sortedCombinedObject).map(([category, price]) => (
+              <div key={category} className="category-entry">
+                <h5>{category}:</h5>
+                <h5>Price: ${price.toFixed(2)}</h5>
+                <h5>Percent of Income: {calculatePercentOfIncome(price)}%</h5>
+              </div>
+            ))}
+          </div>
         </div>
-
-        
-        </>
+      </>
     )
 }
 

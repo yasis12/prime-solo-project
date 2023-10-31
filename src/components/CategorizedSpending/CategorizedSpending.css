@@ -1,0 +1,31 @@
+#categorized-spending-card {
+    background-color: #46994c49;
+    padding: 8px; /* Add padding for spacing inside the card */
+    margin: 12px; /* Add margin to create space around the card */
+    border-radius: 5px; /* Rounded corners for the card */
+    box-shadow: 0 0 6px #b7dcbe; /* Box shadow for a subtle depth effect */
+    text-align: center; /* Align text to the left within the card */
+    max-width: 400px; /* Set a maximum width for the card, adjust as needed */
+    width: 100%;
+    max-height: 500px; /* Set a maximum height for the card, adjust as needed */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+  }
+
+  .category-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .category-entry {
+    border: 2px solid #000; /* Black border */
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    /* background-color: rgba(0, 0, 0, 0.1); Transparent background */
+    width: 300px; /* Adjust width as needed */
+  }

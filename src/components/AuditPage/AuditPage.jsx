@@ -209,8 +209,10 @@ function AuditPage() {
                   <h4>${savingsDebts}</h4>
               </div>
             </div>
+            <div className='categoryCard'>
+             <CategorizedSpending />  
+            </div>
             
-            <CategorizedSpending />  
             
             {/* This section will demonstrate (with out interest) how long it will take to pay off current debts. If there are no current debts it well say congragts */}
             <div className='debtCalculator'>

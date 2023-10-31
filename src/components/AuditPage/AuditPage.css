@@ -43,6 +43,10 @@
     background-color: #46994c;
 }
 
+.categoryCard:hover {
+    transform: scale(1.1); /* Scale the card by 5% on hover */
+}
+
 #audit-title {
     color: black;
     font-size: 50px;
