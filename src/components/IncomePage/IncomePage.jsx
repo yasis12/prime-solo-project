@@ -80,6 +80,7 @@ function IncomePage() {
         history.push('/needs')
     }
     //todo: Add Tool tips to each input
+    //todo: style buttons on this page
     return (
         <>
         <div className='income-page'>
