@@ -1,12 +1,13 @@
 import React from 'react';
 import LoginForm from '../LoginForm/LoginForm';
 import { useHistory } from 'react-router-dom';
+import './LoginPage.css'
 
 function LoginPage() {
   const history = useHistory();
 
   return (
-    <div>
+    <div className='login-page'>
       <LoginForm />
 
       <center>
@@ -16,6 +17,7 @@ function LoginPage() {
           onClick={() => {
             history.push('/registration');
           }}
+          
         >
           Register
         </button>
