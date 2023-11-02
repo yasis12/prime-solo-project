@@ -148,8 +148,8 @@ function AuditPage() {
 
       // Total Monthly Spending
       const totalMonthlySpending = Number(monthlyNeeds) + Number(monthlyWants) + Number(savingsDebts);
-      //! const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
-      const moneyLeftOver = 10;
+      // const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
+      const moneyLeftOver = 1000;
 
       // How long to pay of debts (not including interest) if every month was like the one audited
       const howLongToPayOffDebts = () => {
@@ -168,6 +168,9 @@ function AuditPage() {
 
       const additionalResources = () => {
         history.push('/resources');
+      }
+      const comments = () => {
+        history.push('/budgetcomments');
       }
 
       //todo: Tool Tips
@@ -232,6 +235,7 @@ function AuditPage() {
             </div>
             <div className='button-container'>
               <button onClick={additionalResources}>Additonal Resources</button>
+              <button onClick={comments}>Comments</button>
             </div>
             
           </div>

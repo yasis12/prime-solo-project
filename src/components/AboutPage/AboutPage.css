@@ -1,4 +1,4 @@
-.instructions-page{
+.about-page{
     display: flex;
     justify-content: center;
     min-height: 100vh;
@@ -8,44 +8,20 @@
     background-repeat: repeat;
     background-position: center center;
     min-height: 100vh; 
-  }
+}
 
-  .card {
+#about-card {
     background-color: rgb(232, 232, 232);
     padding: 20px; /* Add padding for spacing inside the card */
     margin: 20px; /* Add margin to create space around the card */
     border-radius: 10px; /* Rounded corners for the card */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.356); /* Box shadow for a subtle depth effect */
     text-align: left; /* Align text to the left within the card */
-    max-width: 600px; /* Set a maximum width for the card, adjust as needed */
+    max-width: 400px; /* Set a maximum width for the card, adjust as needed */
     width: 100%;
-  }
-  
-  #title {
-    text-align: center; /* Center the title */
-    font-size: 24px; /* Adjust the font size as needed */
-  }
-
-  #button {
-    justify-content: center;
-    text-align: center; /* Center the title */
-    font-size: 20px; /* Adjust the font size as needed */
-  }
-
-  #button-container {
-    text-align: center;
-  }
-  
-  ol {
-    padding-left: 20px; /* Add some left padding for list items */
-    margin: 0; /* Remove default margin for the list */
-  }
-  
-  li {
-    font-size: 16px; /* Adjust the font size for list items */
-  }
-
-  #under-title {
-    text-align: center;
-    font-size: 12px;
+    max-height: 300px; /* Set a maximum height for the card, adjust as needed */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
   }

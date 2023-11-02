@@ -9,7 +9,7 @@ import './Footer.css';
 function Footer() {
   return (
     <div className='footer-page'>
-        <footer>&copy; Prime Digital Academy</footer> 
+        <footer>&copy; Rafael Yasis</footer> 
     </div>
   
   )

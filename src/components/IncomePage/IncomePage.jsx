@@ -3,6 +3,11 @@ import './IncomePage.css'
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
+// MUI
+import * as React from 'react';
+import MuiAlert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+
 
 function IncomePage() {
     const history = useHistory();
@@ -12,6 +17,7 @@ function IncomePage() {
     const [otherIncomeForm, setOtherIncomeForm] = useState([{price:'', description: ''}]);
     const [wagesAfterTax, setWagesAfterTax] = useState({ price: '', description: '' });
     const [budgetTitle, setBudgetTitle] = useState('');
+    const [openAlert, setOpenAlert] = useState(false);
     // Store
     const budgetID = useSelector(store => store.budgetID)
 
@@ -34,11 +40,20 @@ function IncomePage() {
                 type: 'SET_BUDGETID',
                 payload: budgetID
             });
+            setOpenAlert(true);
         })
+        
         .catch((error) => {
             console.error('Error saving BudgetID to the server', error);
         });
     };
+
+    const handleCloseAlert = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpenAlert(false);
+      };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -93,6 +108,21 @@ function IncomePage() {
                     <input type="text" placeholder='January 2050' value={budgetTitle} onChange={(event) => setBudgetTitle(event.target.value)} />
                     <button type='submit'>Save BudgetID</button>
                 </form>
+                <Snackbar
+                     open={openAlert}
+                     autoHideDuration={6000} // Adjust as needed
+                     onClose={handleCloseAlert}
+                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <MuiAlert
+                    elevation={6}
+                    variant="filled"
+                    onClose={handleCloseAlert}
+                    severity="info"
+                    >
+                    <strong>Info:</strong> Budget ID has been Saved!
+                    </MuiAlert>
+                </Snackbar>
                 <br /><br /><br />
                 {/* this is the Income Form: user will enter all income */}
                 <h3>INCOME: {budgetTitle}</h3>

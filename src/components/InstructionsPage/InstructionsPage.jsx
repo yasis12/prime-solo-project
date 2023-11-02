@@ -14,6 +14,7 @@ function InstructionsPage() {
         <div className='instructions-page'>
             <div className='card'>
             <h1 id='title'>How To Use Budget Buddy</h1>
+            <p id='under-title'>Budget Buddy can take 1-2 Hours to complete</p>
                 <br />
                 <ol>
                 <li><strong>Enter All Your Transactions:</strong> To get the best insights, it's crucial that you record every single income and expense from the entire previous month. Don't skip any expenses, even if you feel the month was unusual. The more accurate your data, the better your financial insights will be.</li>
@@ -22,6 +23,7 @@ function InstructionsPage() {
                 <li><strong>Analyze Your Insights:</strong> After entering your transactions, Budget Buddy will provide insights into your income and spending habits. Use these insights to identify areas where you might need to cut back or allocate more funds.</li>
                 <li><strong>Create Your Customized Budget (Not yet available in this applicaiton):</strong> Based on the insights provided, you can create a budget that suits your unique financial needs. This budget will help you reach your specific financial goals effectively.</li>
                 <li><strong>Good Luck!</strong> Budget Buddy is here to support your journey to financial stability. Remember that the more honest and detailed you are with your inputs, the more accurate and helpful the tool becomes. Here's to achieving positive financial changes!</li>
+                <li><strong>MAKE SURE TO SAVE EACH PAGE BEFORE MOVING ON</strong></li>
                 </ol>
                 <br />
                 <div id='button-container'>
