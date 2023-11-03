@@ -27,3 +27,7 @@
         flex-direction: column;
         align-items: center; /* Center horizontally */
       }
+
+      #budgetID-input{
+        text-align: center;
+      }

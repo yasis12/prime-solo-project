@@ -3,10 +3,12 @@ import './IncomePage.css'
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
-// MUI
+//! MUI
 import * as React from 'react';
-import MuiAlert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 function IncomePage() {
@@ -17,11 +19,15 @@ function IncomePage() {
     const [otherIncomeForm, setOtherIncomeForm] = useState([{price:'', description: ''}]);
     const [wagesAfterTax, setWagesAfterTax] = useState({ price: '', description: '' });
     const [budgetTitle, setBudgetTitle] = useState('');
-    const [openAlert, setOpenAlert] = useState(false);
+    //! MUI States
+    const [auditName, setAuditName] = useState(false);
+    const [incomeAlert, setIncomeAlert] = useState(false);
+
     // Store
     const budgetID = useSelector(store => store.budgetID)
 
-    //Submit BudgetID
+
+    //! Submit BudgetID
     const handleBudgetIDSubmit = (event) => {
         event.preventDefault();
         //Dispatch BudgetID to the redux store
@@ -40,7 +46,7 @@ function IncomePage() {
                 type: 'SET_BUDGETID',
                 payload: budgetID
             });
-            setOpenAlert(true);
+            setAuditName(true);
         })
         
         .catch((error) => {
@@ -48,13 +54,51 @@ function IncomePage() {
         });
     };
 
-    const handleCloseAlert = (event, reason) => {
+    //! Handle close snackbar
+    const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
           return;
         }
-        setOpenAlert(false);
+    
+        setAuditName(false);
       };
 
+      const handleCloseIncome = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setIncomeAlert(false);
+      };
+
+      const action = (
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="secondary"
+            onClick={handleClose}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      );
+
+      const actionIncome = (
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="secondary"
+            onClick={handleCloseIncome}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      );
+      
+
+      //! income Alert
     const handleSubmit = (event) => {
         event.preventDefault();
         const incomeData = {
@@ -69,6 +113,7 @@ function IncomePage() {
         axios.post('/api/income', requestData)
         .then((response) => {
             console.log(`Income data submitted successfully`);
+            setIncomeAlert(true);
         }).catch(error => {
             console.log('Error submitting Income data', error);
         });
@@ -105,24 +150,18 @@ function IncomePage() {
                 <form onSubmit={handleBudgetIDSubmit}>
                     <h3>Name your Audit:</h3>
                     <p>I recommened this be the Month and Year of the inputs you are using</p>
-                    <input type="text" placeholder='January 2050' value={budgetTitle} onChange={(event) => setBudgetTitle(event.target.value)} />
-                    <button type='submit'>Save BudgetID</button>
+                    <div id='budgetID-input'>
+                        <input type="text" placeholder='January 2050' value={budgetTitle} onChange={(event) => setBudgetTitle(event.target.value)} />
+                        <button type='submit'>Save Audit Name</button>
+                    </div>
+                    <Snackbar
+                        open={auditName}
+                        autoHideDuration={4000}
+                        onClose={handleClose}
+                        message="Audit name has been saved!"
+                        action={action}
+                    />
                 </form>
-                <Snackbar
-                     open={openAlert}
-                     autoHideDuration={6000} // Adjust as needed
-                     onClose={handleCloseAlert}
-                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                >
-                    <MuiAlert
-                    elevation={6}
-                    variant="filled"
-                    onClose={handleCloseAlert}
-                    severity="info"
-                    >
-                    <strong>Info:</strong> Budget ID has been Saved!
-                    </MuiAlert>
-                </Snackbar>
                 <br /><br /><br />
                 {/* this is the Income Form: user will enter all income */}
                 <h3>INCOME: {budgetTitle}</h3>
@@ -143,6 +182,13 @@ function IncomePage() {
                         ))}
                     </div>
                     <button type='submit'>Submit Income</button>
+                    <Snackbar
+                        open={incomeAlert}
+                        autoHideDuration={4000}
+                        onClose={handleCloseIncome}
+                        message="Income has Been submitted! Move to next page!"
+                        action={actionIncome}
+                    />
                 </form>
                 <button onClick={nextPage}>Next Page</button>
             </div>

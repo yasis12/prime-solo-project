@@ -1,7 +1,6 @@
 import './BudgetComments.css'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useSelector} from 'react-redux';
 
 function BudgetComments() {
 
@@ -90,7 +89,7 @@ function BudgetComments() {
             <div id='budget-comments'>
               {budgets.map((budget) => (
               <div key={budget.id}>
-                <h3>{budget.budgetTitle} {budget.id}</h3>
+                <h3>{budget.budgetTitle}</h3>
                   <ul>
                   {comments
                   .filter((comment) => comment.budget_id === budget.id) 
