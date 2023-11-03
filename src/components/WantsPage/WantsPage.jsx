@@ -144,10 +144,6 @@ function WantsPage() {
                 <button onClick={nextPage}>Next Page</button>
             </div>
         </div>
-
-
-
-      
         </>
        
     )

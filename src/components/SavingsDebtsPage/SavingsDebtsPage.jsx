@@ -54,13 +54,13 @@ function SavingsDebtsPage() {
             forms,
             budgetID
         }
-        console.log('Needs Post Request Data:', requestData);
+        console.log('Savings & Debts Post Request Data:', requestData);
         axios.post('/api/savingsdebts', requestData)
         .then((response) => {
-            console.log(`Needs data submitted successfully`);
+            console.log(`Savings & Debts data submitted successfully`);
             setSavingsDebtsAlert(true);
         }).catch(error => {
-            console.log('Error submitting needs data', error);
+            console.log('Error submitting Savings & Debts data', error);
         });
     }
 

@@ -65,12 +65,12 @@
 }
 
 .text-red {
-    color: #DB4881;
-    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; 
+    color: #ff0000;
+
 }
 
 .text-green {
-    color:  #3acd43;
-    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; 
+    color:  #18641d;
+    /* text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;  */
 }
 

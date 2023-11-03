@@ -22,6 +22,7 @@ router.post('/', (req, res) => {
          //loop through the array of expenses for the current category
          expensesArray.forEach((item) => {
              if (item.price) {
+              console.log('Inserting data:', item);
                  insertPromises.push(
                      pool.query(
                          'INSERT INTO "SavingsDebts" ("price", "description", "category", "user_id", "budget_id") VALUES($1, $2, $3, $4, $5)',
@@ -34,11 +35,20 @@ router.post('/', (req, res) => {
                          ]
                      )
                  )
-                 res.sendStatus(201);
              }
          });
      }
    }
+
+   Promise.all(insertPromises)
+   .then(() => {
+       console.log('Data inserted successfully');
+       res.sendStatus(201); // Created
+   })
+   .catch((error) => {
+       console.error('Error inserting data:', error);
+       res.status(500).json({ error: 'An error occurred' });
+   });
 });
 
 

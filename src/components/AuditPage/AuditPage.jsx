@@ -9,10 +9,10 @@ import CategorizedSpending from '../CategorizedSpending/CategorizedSpending';
 function AuditPage() {
     const history = useHistory();
     // Store
-    //! const budgetTitle = useSelector(store => store.budgetTitle);
-    //! const budgetID = useSelector(store => store.budgetID);
-    const budgetID = 17;
-    const budgetTitle = 'Januaray 2020'
+    const budgetTitle = useSelector(store => store.budgetTitle);
+    const budgetID = useSelector(store => store.budgetID);
+    console.log('budgetID', budgetID);
+    console.log('budgetTitle', budgetTitle);
     // States for calculations
     const [budgets, setBudgets] = useState([]);
     const [income, setIncome] = useState([]);
@@ -148,8 +148,8 @@ function AuditPage() {
 
       // Total Monthly Spending
       const totalMonthlySpending = Number(monthlyNeeds) + Number(monthlyWants) + Number(savingsDebts);
-      // const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
-      const moneyLeftOver = 1000;
+      const moneyLeftOver = Number(monthlyIncome) - totalMonthlySpending;
+      // const moneyLeftOver = 1000;
 
       // How long to pay of debts (not including interest) if every month was like the one audited
       const howLongToPayOffDebts = () => {

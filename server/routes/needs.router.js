@@ -40,6 +40,15 @@ router.post('/', (req, res) => {
         });
     }
   }
+  Promise.all(insertPromises)
+  .then(() => {
+      console.log('Data inserted successfully');
+      res.sendStatus(201); // Created
+  })
+  .catch((error) => {
+      console.error('Error inserting data:', error);
+      res.status(500).json({ error: 'An error occurred' });
+  });
 }); // END post Route
 
 //Get Route
