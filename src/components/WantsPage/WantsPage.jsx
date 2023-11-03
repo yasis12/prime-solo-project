@@ -3,6 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+// MUI
+import * as React from 'react';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 function WantsPage() {
     const history = useHistory();
@@ -21,6 +26,8 @@ function WantsPage() {
         homeDecor: [{ price: '', description: '' }],
         other: [{ price: '', description: '' }]
     })
+    //! MUI State
+    const [wantsAlert, setWantsAlert] = useState(false);
 
     // HANDLE + BUTTON CLICK
     const addInputField = (category) => {
@@ -50,11 +57,31 @@ function WantsPage() {
         axios.post('/api/wants', requestData)
         .then((response) => {
             console.log(`Wants data submitted successfully`);
+            setWantsAlert(true);
         }).catch(error => {
             console.log('Error submitting wants data', error);
         });
-
     }
+    //! MUI handle close
+    const handleCloseWants = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setWantsAlert(false);
+      };
+
+      const wantsAction = (
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="secondary"
+            onClick={handleCloseWants}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      );
 
     const nextPage = () => {
         history.push('/savingsdebts')
@@ -105,6 +132,13 @@ function WantsPage() {
                     </div>
                 ))}
                 <button type='submit'>Save Wants</button>
+                <Snackbar
+                    open={wantsAlert}
+                    autoHideDuration={4000}
+                    onClose={handleCloseWants}
+                    Action={wantsAction}
+                    message='Wants have been submitted! Navigate to the next page.'
+                />
                 {/* END FORM */}
                 </form>
                 <button onClick={nextPage}>Next Page</button>

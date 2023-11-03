@@ -3,6 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+// MUI
+import * as React from 'react';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 function SavingsDebtsPage() {
     const history = useHistory();
@@ -22,6 +27,8 @@ function SavingsDebtsPage() {
         other: [{ price: '', description: '' }],
         debts: [{ price: '', description: '' }]
     })
+    //! MUI State
+    const [savingsDebtsAlert, setSavingsDebtsAlert] = useState(false);
 
     // HANDLE + BUTTON CLICK
     const addInputField = (category) => {
@@ -51,12 +58,33 @@ function SavingsDebtsPage() {
         axios.post('/api/savingsdebts', requestData)
         .then((response) => {
             console.log(`Needs data submitted successfully`);
+            setSavingsDebtsAlert(true);
         }).catch(error => {
             console.log('Error submitting needs data', error);
         });
-
     }
 
+     //! MUI handle close
+     const handleCloseSavingsDebts = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setWantsAlert(false);
+      };
+
+      const savingsDebtsAction = (
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="secondary"
+            onClick={handleCloseSavingsDebts}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      );
+      
     const nextPage = () => {
         history.push('/audit')
     }
@@ -108,6 +136,13 @@ function SavingsDebtsPage() {
                     </div>
                 ))}
                 <button type='submit'>Submit Savings & Debts</button>
+                <Snackbar
+                    open={savingsDebtsAlert}
+                    autoHideDuration={4000}
+                    onClose={handleCloseSavingsDebts}
+                    Action={savingsDebtsAction}
+                    message='Wants have been submitted! Navigate to the next page.'
+                />
                 {/* END FORM */}
                 </form>
                 <button onClick={nextPage}>Next Page</button>
