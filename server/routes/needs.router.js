@@ -35,6 +35,7 @@ router.post('/', (req, res) => {
                         ]
                     )
                 )
+                res.sendStatus(201);
             }
         });
     }

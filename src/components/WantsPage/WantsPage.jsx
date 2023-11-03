@@ -75,7 +75,7 @@ function WantsPage() {
                         <label>
                             {category === 'diningOut' ? 'Dining Out' : 
                                 category === 'clothingJewlery' ? 'Clothing & Jewlery' : 
-                                category === 'drugs' ? 'Drugs (Alcohol, THC)' :
+                                category === 'drugs' ? 'Recreational Use Items' :
                                 category === 'moviesEvents' ? 'Movies & Events' :
                                 category === 'memberships' ? 'Memberships' :
                                 category === 'travel' ? 'Travel' :

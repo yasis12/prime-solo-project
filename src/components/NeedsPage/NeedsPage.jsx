@@ -4,7 +4,10 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 // MUI
-
+import * as React from 'react';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 function NeedsPage() {
     const history = useHistory();
@@ -30,6 +33,9 @@ function NeedsPage() {
         gas: [{ price: '', description: '' }],
         other: [{ price: '', description: '' }]
     })
+    //! MUI State
+
+    const [needsAlert, setNeedsAlert] = useState(false);
 
 
     // HANDLE + BUTTON CLICK
@@ -60,17 +66,40 @@ function NeedsPage() {
         axios.post('/api/needs', requestData)
         .then((response) => {
             console.log(`Needs data submitted successfully`);
+            setNeedsAlert(true);
         }).catch(error => {
             console.log('Error submitting needs data', error);
         });
     }
 
+    //! MUI handle close
+    const handleCloseNeeds = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setNeedsAlert(false);
+      };
+
+      const needsAction = (
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="secondary"
+            onClick={handleCloseNeeds}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      );
+
+    // Next Page
     const nextPage = () => {
         history.push('/wants')
     }
 
     //todo: Add Tool tips to each input
-        //todo: style buttons on this page
+    //todo: style buttons on this page
 
     return (
         <>
@@ -124,8 +153,16 @@ function NeedsPage() {
                     </div>
                 ))}
                 <button type='submit'>Save Needs</button>
-                {/* END FORM */}
+                <Snackbar
+                    open={needsAlert}
+                    autoHideDuration={4000}
+                    onClose={handleCloseNeeds}
+                    Action={needsAction}
+                    message='Needs have been submitted! Navigate to the next page.'
+                />
+                
                 </form>
+               
                 <button onClick={nextPage}>Next Page</button>
             </div>
         </div>

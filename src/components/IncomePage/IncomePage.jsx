@@ -5,7 +5,6 @@ import { useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 //! MUI
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -59,7 +58,6 @@ function IncomePage() {
         if (reason === 'clickaway') {
           return;
         }
-    
         setAuditName(false);
       };
 
@@ -186,7 +184,7 @@ function IncomePage() {
                         open={incomeAlert}
                         autoHideDuration={4000}
                         onClose={handleCloseIncome}
-                        message="Income has Been submitted! Move to next page!"
+                        message="Income has Been submitted! Navigate to the next page!"
                         action={actionIncome}
                     />
                 </form>
