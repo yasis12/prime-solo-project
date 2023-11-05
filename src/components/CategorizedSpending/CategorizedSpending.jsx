@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CategorizedSpending.css'
+import { useSelector } from 'react-redux';
 
 function CategorizedSpending() {
 
-    //! const budgetID = useSelector(store => store.budgetID);
-    const budgetID = 17;
+    const budgetID = useSelector(store => store.budgetID);
+    // const budgetID = 17;
     const [income, setIncome] = useState([]);
     const [needs, setNeeds] = useState([]);
     const [wants, setWants] = useState([]);
