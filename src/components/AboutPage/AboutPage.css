@@ -19,7 +19,7 @@
     text-align: left; /* Align text to the left within the card */
     max-width: 400px; /* Set a maximum width for the card, adjust as needed */
     width: 100%;
-    max-height: 300px; /* Set a maximum height for the card, adjust as needed */
+    max-height: 450px; /* Set a maximum height for the card, adjust as needed */
     overflow-y: auto; /* Add vertical scroll if content overflows */
     display: flex;
     flex-direction: column;

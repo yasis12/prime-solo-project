@@ -208,7 +208,7 @@ function AuditPage() {
               </div>
               <div className='budgetCard' id='savingsDebts'>
                   <h4>Savings & Debt Payments (20%)</h4>
-                  <h4 className={`${savingsDebtsPercent > 20 ? 'text-red' : 'text-yellow'}`}>Your Spending Rate: {savingsDebtsPercent}%</h4>
+                  <h4 className={`${savingsDebtsPercent > 20 ? 'text-yellow' : 'text-green'}`}>Your Spending Rate: {savingsDebtsPercent}%</h4>
                   <h4>${savingsDebts}</h4>
               </div>
             </div>

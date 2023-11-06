@@ -31,11 +31,10 @@ router.post('/', (req, res) => {
                             item.description,
                             category,
                             userID,
-                            budgetID,
+                            budgetID, 
                         ]
                     )
                 )
-                res.sendStatus(201);
             }
         });
     }
