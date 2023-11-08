@@ -69,7 +69,7 @@ function SavingsDebtsPage() {
         if (reason === 'clickaway') {
           return;
         }
-        setWantsAlert(false);
+        setSavingsDebtsAlert(false);
       };
 
       const savingsDebtsAction = (

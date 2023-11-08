@@ -143,7 +143,7 @@ function IncomePage() {
         <>
         <div className='income-page'>
             <div id='income-card'>
-                <h1>Income Page</h1>
+                <h1>Income</h1>
                 {/* Creating the Budget ID here. */}
                 <form onSubmit={handleBudgetIDSubmit}>
                     <h3>Name your Audit:</h3>
