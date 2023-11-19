@@ -25,10 +25,6 @@ router.post('/', (req, res) => {
     const { comment, budgetID } = req.body;
     const userID = req.user.id;
 
-    console.log('comment', comment);
-    console.log('budget ID', budgetID);
-    console.log('userID', userID);
-
     pool.query(
         `INSERT INTO "BudgetComments" ("comments", "user_id", "budget_id") VALUES ($1, $2, $3)`,
         [comment, userID, budgetID]
@@ -63,8 +59,6 @@ router.delete('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   const commentId = req.params.id;
   const { comment } = req.body;
-  console.log('Comment ID', commentId);
-  console.log('Comment edit', comment);
   pool.query(
     'UPDATE "BudgetComments" SET "comments" = $1 WHERE "id" = $2',
     [comment, commentId]

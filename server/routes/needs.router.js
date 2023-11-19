@@ -5,12 +5,7 @@ const router = express.Router();
 // Post Route
 router.post('/', (req, res) => {
   // POST route code here
-  console.log('is authenticated?', req.isAuthenticated());
-  console.log('User', req.user.id);
   const { forms, budgetID } = req.body;
-  console.log('Needs Data', forms);
-  console.log('Budget ID', budgetID);
-
   const userID = req.user.id;
 
   // Database Insertion logic

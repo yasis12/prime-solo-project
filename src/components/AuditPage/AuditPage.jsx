@@ -11,8 +11,6 @@ function AuditPage() {
     // Store
     const budgetTitle = useSelector(store => store.budgetTitle);
     const budgetID = useSelector(store => store.budgetID);
-    console.log('budgetID', budgetID);
-    console.log('budgetTitle', budgetTitle);
     // States for calculations
     const [budgets, setBudgets] = useState([]);
     const [income, setIncome] = useState([]);

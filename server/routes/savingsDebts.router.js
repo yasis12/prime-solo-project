@@ -4,12 +4,7 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
    // POST route code here
-   console.log('is authenticated?', req.isAuthenticated());
-   console.log('User', req.user.id);
    const { forms, budgetID } = req.body;
-   console.log('Needs Data', forms);
-   console.log('Budget ID', budgetID);
- 
    const userID = req.user.id;
  
    // Database Insertion logic
@@ -22,7 +17,6 @@ router.post('/', (req, res) => {
          //loop through the array of expenses for the current category
          expensesArray.forEach((item) => {
              if (item.price) {
-              console.log('Inserting data:', item);
                  insertPromises.push(
                      pool.query(
                          'INSERT INTO "SavingsDebts" ("price", "description", "category", "user_id", "budget_id") VALUES($1, $2, $3, $4, $5)',
