@@ -13,16 +13,16 @@
 
 #wants-card {
     background-color: rgb(232, 232, 232);
-    padding: 20px; /* Add padding for spacing inside the card */
-    margin: 20px; /* Add margin to create space around the card */
-    border-radius: 10px; /* Rounded corners for the card */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.356); /* Box shadow for a subtle depth effect */
-    text-align: left; /* Align text to the left within the card */
-    max-width: 600px; /* Set a maximum width for the card, adjust as needed */
+    padding: 20px; 
+    margin: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.356); 
+    text-align: left;
+    max-width: 600px; 
     width: 100%;
-    max-height: 800px; /* Set a maximum height for the card, adjust as needed */
-    overflow-y: auto; /* Add vertical scroll if content overflows */
+    max-height: 800px;
+    overflow-y: auto; 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center horizontally */
+    align-items: center;
   }
