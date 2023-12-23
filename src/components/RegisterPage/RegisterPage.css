@@ -8,3 +8,7 @@
     background-position: center center;
     min-height: 100vh; 
 }
+
+.register-form {
+    justify-content: center;
+}

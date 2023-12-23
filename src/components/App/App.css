@@ -32,7 +32,7 @@ Button
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #46994c;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -61,13 +61,13 @@ Button
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .btn_asLink {
-  padding: 0;
-  border-width: 0;
-  border-bottom: 1px solid #444;
-  border-radius: 0;
-  background: none;
-  font: inherit;
-  color: #444;
+  color: #efefef;
+  padding: 10px; /* Add padding for spacing inside the card */
+  margin: 20px; /* Add margin to create space around the card */
+  border-radius: 10px; /* Rounded corners for the card */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.356); /* Box shadow for a subtle depth effect */
+  text-align: center; /* Align text to the left within the card */
+  max-width: 100px; /* Set a maximum width for the card, adjust as needed */
 }
 
 .btn_asLink:hover {

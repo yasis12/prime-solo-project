@@ -9,8 +9,9 @@ function RegisterPage() {
   return (
     <div className='register-page'>
       <br /><br />
-      <RegisterForm />
-
+      <div id='register-form'>
+       <RegisterForm />
+      </div>
       <center>
         <button
           type="button"
