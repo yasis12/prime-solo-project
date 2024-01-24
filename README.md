@@ -27,7 +27,6 @@ If you would like to name your database something else, you will need to change 
 - MUI
 
 # Calculations
-Explain the calculations performed in your application. Describe the purpose and results of each calculation function.
 ### Total Monthly Income
 
 The `totalMonthlyIncome` function calculates the total monthly income for a selected budget. It filters income items based on the budget and sums up the prices.
